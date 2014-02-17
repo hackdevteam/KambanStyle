@@ -19,12 +19,11 @@ class UserMapperTest(unittest.TestCase):
 	def test_delete_user(self):
 		user_mapper = UserMapper(RamUserStore())
 		user_mapper.insert(User("ramclen", "1234"))
-    user_mapper.delete(User("ramclen", "1234"))
-		self.assertEqual(0, len(user_mapper.user_list()))
-
-
+		elements_before_deletion = len(user_mapper.user_list())
+		user_mapper.delete("ramclen")
+		elements_after_deletion = len(user_mapper.user_list())
+		self.assertEqual(1, elements_before_deletion)
+		self.assertEqual(0, elements_after_deletion)
 
 	def test_delete_unexistent_user(self):
 		self.assertTrue(False)
-
-	
