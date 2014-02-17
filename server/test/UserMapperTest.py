@@ -1,7 +1,7 @@
 import unittest
-from RamUserStore import RamUserStore
-from User import User
-from UserMapper import UserMapper
+from server.RamUserStore import RamUserStore
+from server.User import User
+from server.UserMapper import UserMapper
 
 
 class UserMapperTest(unittest.TestCase):
@@ -13,9 +13,13 @@ class UserMapperTest(unittest.TestCase):
 		self.assertEqual("ramclen", user.user_name)
 		self.assertEqual("1234", user.password)
 
-	#def test_insert_duplicated_user(self):
+	def test_insert_duplicated_user(self):
+		self.assertTrue(False)
 
-	#def test_delete_user(self):
+	def test_delete_user(self):
+		self.assertTrue(False)
 
-	#def test_delete_unexistent_user(self):
+	def test_delete_unexistent_user(self):
+		self.assertTrue(False)
+
 	
