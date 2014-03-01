@@ -1,5 +1,7 @@
+import uuid
 
 
 class MockColumn():
-	def __init__(self, column_id):
-		self.id = column_id
+	def __init__(self, name):
+		self.name = name
+		self.id = uuid.uuid4()
