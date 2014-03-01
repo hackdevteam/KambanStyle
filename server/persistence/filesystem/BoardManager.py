@@ -11,7 +11,7 @@ class BoardManager():
 		self.board_id = board_id
 		self.working_directory = os.path.join(BASE_FOLDER, board_id)
 
-	def columns_ids(self):
+	def get_columns_ids(self):
 		return os.listdir(self.working_directory)
 
 	def load_column(self, column_id):
@@ -19,3 +19,12 @@ class BoardManager():
 
 	def save_column(self, column):
 		saver.save_column(self.working_directory, column)
+
+	def save_task(self, task):
+		saver.save_task(self.working_directory, task)
+
+	def get_tasks_ids(self, column_id):
+		tasks_ids = []
+		for board, directories, tasks in os.walk(os.path.join(self.working_directory, str(column_id))):
+			tasks_ids.extend(tasks)
+		return tasks_ids;
