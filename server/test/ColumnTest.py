@@ -4,6 +4,7 @@ from server.KanbanModel.Task import Task
 
 
 class ColumnTest(unittest.TestCase):
+
   def test_create_column(self):
     column = Column("MyTitle")
     self.assertEqual("MyTitle", column.get_title())
