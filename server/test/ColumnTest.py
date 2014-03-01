@@ -8,6 +8,10 @@ class ColumnTest(unittest.TestCase):
     column = Column("MyTitle")
     self.assertEqual("MyTitle", column.get_title())
 
+  def test_get_title_column(self):
+    column = Column("MyTitle")
+    self.assertEqual("MyTitle", column.get_title())
+
   def test_add_task_to_column(self):
     task = Task("MyTitle Task", "Description of the task title")
     column = Column("MyTitle Column")
