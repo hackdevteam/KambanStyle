@@ -1,6 +1,7 @@
 import os
-from server.persistence import loader
-from server.persistence import saver
+from server.persistence.filesystem import saver
+from server.persistence.filesystem import loader
+
 
 BASE_FOLDER = os.path.abspath("../../resources")
 

@@ -6,7 +6,7 @@ COLUMN_PROPERTIES_FILE = ".properties"
 
 
 def save_column(working_directory, column):
-	column_directory = join(working_directory, column.id)
+	column_directory = join(working_directory, str(column.id))
 	column_properties_file = join(column_directory, COLUMN_PROPERTIES_FILE)
 	create_directory(column_directory)
 	serialize_object(column, column_properties_file)
