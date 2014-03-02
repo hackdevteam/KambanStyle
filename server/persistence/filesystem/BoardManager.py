@@ -1,4 +1,5 @@
 import os
+from os import remove
 from server.persistence.filesystem.operative_system import *
 
 COLUMN_PROPERTIES_SUFFIX = ".clm"
@@ -15,7 +16,7 @@ class BoardManager():
 			return directories
 
 	def load_column(self, column_id):
-		column_properties_path = os.path.join(self._working_directory, column_id, COLUMN_PROPERTIES_SUFFIX)
+		column_properties_path = os.path.join(self._working_directory, column_id + COLUMN_PROPERTIES_SUFFIX)
 		column = deserialise_object(column_properties_path)
 		return column
 
@@ -38,4 +39,4 @@ class BoardManager():
 	def delete_task(self, task_id):
 		for dir_name, directories, files in os.walk(self._working_directory):
 			if task_id in files:
-				os.remove(os.path.join(dir_name, task_id))
+				remove(os.path.join(dir_name, task_id))

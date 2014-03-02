@@ -1,14 +1,12 @@
 import os
-import pickle
 import unittest
 
 from server.persistence.MockColumn import MockColumn
 from server.persistence.MockTask import MockTask
 from server.persistence.filesystem.BoardManager import BoardManager
-from server.test.persistence.commons import remove_data
+from server.test.persistence.commons import remove_data, BASE_FOLDER, serialize_object
 
 TEST_BOARD_ID = "test_board"
-BASE_FOLDER = os.path.abspath("../../resources")
 
 
 class BoardManagerTest(unittest.TestCase):
@@ -21,7 +19,8 @@ class BoardManagerTest(unittest.TestCase):
 		remove_data(os.path.abspath(os.path.join(BASE_FOLDER, TEST_BOARD_ID)))
 
 	def test_load_column(self):
-		serialize_column(MockColumn("column inserted manually"))
+		column = MockColumn("column inserted manually")
+		serialize_object(os.path.join(BASE_FOLDER, TEST_BOARD_ID), column.id + ".clm", column)
 		loaded_column = self.board_manager.load_column(self.board_manager.get_columns_ids()[0])
 		self.assertEqual("column inserted manually", loaded_column.name)
 
@@ -92,11 +91,3 @@ class BoardManagerTest(unittest.TestCase):
 		self.board_manager.delete_task(task_1.id)
 		self.board_manager.delete_task(task_1.id)
 		self.assertEqual(1, len(self.board_manager.get_tasks_ids(column.id)))
-
-def serialize_column(column):
-		working_directory = os.path.join(BASE_FOLDER, TEST_BOARD_ID, str(column.id))
-		column_serialized_path = os.path.join(working_directory, ".clm")
-		os.makedirs(working_directory)
-		column_file = open(column_serialized_path, "w+")
-		pickle.dump(column, column_file)
-		column_file.close()

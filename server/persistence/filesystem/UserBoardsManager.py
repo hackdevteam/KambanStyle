@@ -1,5 +1,5 @@
 import os
-from server.persistence.filesystem.operative_system import create_directory, serialise_object
+from server.persistence.filesystem.operative_system import *
 
 BOARD_SUFFIX = ".brd"
 
@@ -15,3 +15,6 @@ class UserBoardsManager():
 	def save_board(self, board):
 		create_directory(os.path.join(self._user_base_folder, board.id))
 		serialise_object(board, os.path.join(self._user_base_folder, board.id + BOARD_SUFFIX))
+
+	def load_board(self, board_id):
+		return deserialise_object(os.path.join(self._user_base_folder, board_id + BOARD_SUFFIX))
