@@ -11,7 +11,7 @@ TEST_BOARD_ID = "test_board"
 BASE_FOLDER = os.path.abspath("../../resources")
 
 
-class FilesystemBoardManagerTest(unittest.TestCase):
+class BoardManagerTest(unittest.TestCase):
 
 	def setUp(self):
 		self.remove_data()
