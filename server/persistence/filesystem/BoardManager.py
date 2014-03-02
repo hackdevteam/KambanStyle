@@ -1,8 +1,6 @@
 import os
 from os.path import join
-from os.path import exists
-import pickle
-
+from server.persistence.filesystem.operative_system import *
 
 COLUMN_PROPERTIES_SUFFIX = ".clm"
 
@@ -42,22 +40,3 @@ class BoardManager():
 		for dir_name, directories, files in os.walk(self._working_directory):
 			if task_id in files:
 				os.remove(os.path.join(dir_name, task_id))
-
-
-def create_directory(column_directory):
-		if not exists(column_directory):
-			os.makedirs(column_directory)
-
-
-def serialize_object(object_to_save, destination_path):
-		property_file = open(destination_path, "w+")
-		pickle.dump(object_to_save, property_file)
-		property_file.close()
-
-
-def deserialize_object(object_path):
-	properties_file = open(object_path, "r")
-	loaded_object = pickle.load(properties_file)
-	properties_file.close()
-	return loaded_object
-
