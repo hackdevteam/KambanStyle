@@ -9,9 +9,9 @@ class BoardApiEndPoint(object):
 
     def POST(self, name):
         board = Board(name)
-        id = str(max([int(_) for _ in boards.keys()]) + 1)
-        boards[id] = board.get_name()
-        return {boards[id]}
+        identification = str(max([int(_) for _ in boards.keys()]) + 1)
+        boards[identification] = board.get_name()
+        return {boards[identification]}
 
 if __name__ == '__main__':
     cherrypy.tree.mount(
