@@ -1,30 +1,63 @@
 import os
-from server.persistence.filesystem import saver
-from server.persistence.filesystem import loader
+from os.path import join
+from os.path import exists
+import pickle
 
 
-BASE_FOLDER = os.path.abspath("../../resources")
+COLUMN_PROPERTIES_SUFFIX = ".clm"
 
 
 class BoardManager():
-	def __init__(self, board_id):
-		self.board_id = board_id
-		self.working_directory = os.path.join(BASE_FOLDER, board_id)
+	def __init__(self, board_id, base_directory):
+		self._board_id = board_id
+		self._base_directory = base_directory
+		self._working_directory = os.path.join(base_directory, board_id)
 
 	def get_columns_ids(self):
-		return os.listdir(self.working_directory)
+		for dir_name, directories, files in os.walk(self._working_directory):
+			return directories
 
 	def load_column(self, column_id):
-		return loader.load_column(self.working_directory, column_id)
+		column_properties_path = join(self._working_directory, column_id, COLUMN_PROPERTIES_SUFFIX)
+		column = deserialize_object(column_properties_path)
+		return column
 
 	def save_column(self, column):
-		saver.save_column(self.working_directory, column)
-
-	def save_task(self, task):
-		saver.save_task(self.working_directory, task)
+		column_directory = join(self._working_directory, column.id)
+		column_properties_file = join(self._working_directory, column.id + COLUMN_PROPERTIES_SUFFIX)
+		create_directory(column_directory)
+		serialize_object(column, column_properties_file)
 
 	def get_tasks_ids(self, column_id):
 		tasks_ids = []
-		for board, directories, tasks in os.walk(os.path.join(self.working_directory, str(column_id))):
+		for board, directories, tasks in os.walk(os.path.join(self._working_directory, column_id)):
 			tasks_ids.extend(tasks)
-		return tasks_ids;
+		return tasks_ids
+
+	def save_task(self, task):
+		task_properties_file = join(self._working_directory, task.column_id, task.id)
+		serialize_object(task, task_properties_file)
+
+	def delete_task(self, task_id):
+		for dir_name, directories, files in os.walk(self._working_directory):
+			if task_id in files:
+				os.remove(os.path.join(dir_name, task_id))
+
+
+def create_directory(column_directory):
+		if not exists(column_directory):
+			os.makedirs(column_directory)
+
+
+def serialize_object(object_to_save, destination_path):
+		property_file = open(destination_path, "w+")
+		pickle.dump(object_to_save, property_file)
+		property_file.close()
+
+
+def deserialize_object(object_path):
+	properties_file = open(object_path, "r")
+	loaded_object = pickle.load(properties_file)
+	properties_file.close()
+	return loaded_object
+

@@ -36,9 +36,6 @@ class FilesystemBoardManagerTest(unittest.TestCase):
 		self.assertTrue(os.path.exists(os.path.join(BASE_FOLDER, TEST_BOARD_ID, str(column_2.id))))
 		self.assertTrue(os.path.exists(os.path.join(BASE_FOLDER, TEST_BOARD_ID, str(column_3.id))))
 
-	def test_delete_column(self):
-		self.assertTrue(False)
-
 	def test_get_columns_ids(self):
 		column_1 = MockColumn("column 1")
 		column_2 = MockColumn("column 2")
@@ -83,10 +80,18 @@ class FilesystemBoardManagerTest(unittest.TestCase):
 		self.assertEqual(3, len(self.board_manager.get_tasks_ids(column.id)))
 		self.board_manager.delete_task(task_1.id)
 		self.assertEqual(2, len(self.board_manager.get_tasks_ids(column.id)))
-		self.assertTrue(False)
 
-	def test_delete_a_deleted_task(self):
-		self.assertTrue(False)
+	def test_delete_an_non_existent_task(self):
+		column = MockColumn("column 1")
+		os.makedirs(os.path.join(BASE_FOLDER, TEST_BOARD_ID, str(column.id)))
+		task_1 = MockTask("task 1", "", column.id)
+		task_2 = MockTask("task 2", "", column.id)
+		self.board_manager.save_task(task_1)
+		self.board_manager.save_task(task_2)
+		self.assertEqual(2, len(self.board_manager.get_tasks_ids(column.id)))
+		self.board_manager.delete_task(task_1.id)
+		self.board_manager.delete_task(task_1.id)
+		self.assertEqual(1, len(self.board_manager.get_tasks_ids(column.id)))
 
 	def remove_data(self):
 		data_path = os.path.abspath(os.path.join(BASE_FOLDER, TEST_BOARD_ID))
