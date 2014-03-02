@@ -1,42 +1,31 @@
-import os
-from os import remove
-from server.persistence.filesystem.operative_system import *
+from server.persistence.filesystem.operating_system import *
 
 COLUMN_PROPERTIES_SUFFIX = ".clm"
 
 
 class BoardManager():
 	def __init__(self, board_id, base_directory):
-		self._board_id = board_id
-		self._base_directory = base_directory
-		self._working_directory = os.path.join(base_directory, board_id)
+		self._working_directory = join_paths(base_directory, board_id)
 
 	def get_columns_ids(self):
-		for dir_name, directories, files in os.walk(self._working_directory):
-			return directories
+		return list_directories(self._working_directory)
 
 	def load_column(self, column_id):
-		column_properties_path = os.path.join(self._working_directory, column_id + COLUMN_PROPERTIES_SUFFIX)
-		column = deserialise_object(column_properties_path)
-		return column
+		return deserialise_object(join_paths(self._working_directory, column_id + COLUMN_PROPERTIES_SUFFIX))
 
 	def save_column(self, column):
-		column_directory = os.path.join(self._working_directory, column.id)
-		column_properties_file = os.path.join(self._working_directory, column.id + COLUMN_PROPERTIES_SUFFIX)
-		create_directory(column_directory)
-		serialise_object(column, column_properties_file)
+		create_directory(join_paths(self._working_directory, column.id))
+		serialise_object(column, join_paths(self._working_directory, column.id + COLUMN_PROPERTIES_SUFFIX))
 
 	def get_tasks_ids(self, column_id):
-		tasks_ids = []
-		for board, directories, tasks in os.walk(os.path.join(self._working_directory, column_id)):
-			tasks_ids.extend(tasks)
-		return tasks_ids
+		return list_files(join_paths(self._working_directory, column_id))
 
 	def save_task(self, task):
-		task_properties_file = os.path.join(self._working_directory, task.column_id, task.id)
-		serialise_object(task, task_properties_file)
+		serialise_object(task, join_paths(self._working_directory, task.column_id, task.id))
 
 	def delete_task(self, task_id):
-		for dir_name, directories, files in os.walk(self._working_directory):
-			if task_id in files:
-				remove(os.path.join(dir_name, task_id))
+		for column_directory in list_directories(self._working_directory):
+			for task_file in list_files(join_paths(self._working_directory, column_directory)):
+				if task_id in task_file:
+					remove(join_paths(self._working_directory, column_directory, task_id))
+					return

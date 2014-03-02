@@ -36,12 +36,9 @@ class BoardManagerTest(unittest.TestCase):
 		self.assertTrue(os.path.exists(os.path.join(BASE_FOLDER, TEST_BOARD_ID, str(column_3.id))))
 
 	def test_get_columns_ids(self):
-		column_1 = MockColumn("column 1")
-		column_2 = MockColumn("column 2")
-		column_3 = MockColumn("column 3")
-		self.board_manager.save_column(column_1)
-		self.board_manager.save_column(column_2)
-		self.board_manager.save_column(column_3)
+		self.board_manager.save_column(MockColumn("column 1"))
+		self.board_manager.save_column(MockColumn("column 2"))
+		self.board_manager.save_column(MockColumn("column 3"))
 		self.assertEqual(3, len(self.board_manager.get_columns_ids()))
 
 	def test_save_a_column_with_duplicated_name(self):
@@ -52,12 +49,9 @@ class BoardManagerTest(unittest.TestCase):
 	def test_get_tasks_ids(self):
 		column = MockColumn("column 1")
 		os.makedirs(os.path.join(BASE_FOLDER, TEST_BOARD_ID, str(column.id)))
-		task_1 = MockTask("task 1", "", column.id)
-		task_2 = MockTask("task 1", "", column.id)
-		task_3 = MockTask("task 1", "", column.id)
-		self.board_manager.save_task(task_1)
-		self.board_manager.save_task(task_2)
-		self.board_manager.save_task(task_3)
+		self.board_manager.save_task(MockTask("task 1", "", column.id))
+		self.board_manager.save_task(MockTask("task 1", "", column.id))
+		self.board_manager.save_task(MockTask("task 1", "", column.id))
 		self.assertEqual(3, len(self.board_manager.get_tasks_ids(column.id)))
 
 	def test_save_a_task(self):
@@ -71,11 +65,9 @@ class BoardManagerTest(unittest.TestCase):
 		column = MockColumn("column 1")
 		os.makedirs(os.path.join(BASE_FOLDER, TEST_BOARD_ID, str(column.id)))
 		task_1 = MockTask("task 1", "", column.id)
-		task_2 = MockTask("task 2", "", column.id)
-		task_3 = MockTask("task 3", "", column.id)
 		self.board_manager.save_task(task_1)
-		self.board_manager.save_task(task_2)
-		self.board_manager.save_task(task_3)
+		self.board_manager.save_task(MockTask("task 2", "", column.id))
+		self.board_manager.save_task(MockTask("task 3", "", column.id))
 		self.assertEqual(3, len(self.board_manager.get_tasks_ids(column.id)))
 		self.board_manager.delete_task(task_1.id)
 		self.assertEqual(2, len(self.board_manager.get_tasks_ids(column.id)))
@@ -84,9 +76,8 @@ class BoardManagerTest(unittest.TestCase):
 		column = MockColumn("column 1")
 		os.makedirs(os.path.join(BASE_FOLDER, TEST_BOARD_ID, str(column.id)))
 		task_1 = MockTask("task 1", "", column.id)
-		task_2 = MockTask("task 2", "", column.id)
 		self.board_manager.save_task(task_1)
-		self.board_manager.save_task(task_2)
+		self.board_manager.save_task(MockTask("task 2", "", column.id))
 		self.assertEqual(2, len(self.board_manager.get_tasks_ids(column.id)))
 		self.board_manager.delete_task(task_1.id)
 		self.board_manager.delete_task(task_1.id)

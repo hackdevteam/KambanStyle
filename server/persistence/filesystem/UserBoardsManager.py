@@ -1,6 +1,4 @@
-import os
-from server.persistence.filesystem.operative_system import *
-
+from server.persistence.filesystem.operating_system import *
 BOARD_SUFFIX = ".brd"
 
 
@@ -9,12 +7,11 @@ class UserBoardsManager():
 		self._user_base_folder = user_base_folder
 
 	def get_boards_ids(self):
-		for dir_name, directories, files in os.walk(self._user_base_folder):
-			return directories
+		return list_directories(self._user_base_folder)
 
 	def save_board(self, board):
-		create_directory(os.path.join(self._user_base_folder, board.id))
-		serialise_object(board, os.path.join(self._user_base_folder, board.id + BOARD_SUFFIX))
+		create_directory(join_paths(self._user_base_folder, board.id))
+		serialise_object(board, join_paths(self._user_base_folder, board.id + BOARD_SUFFIX))
 
 	def load_board(self, board_id):
-		return deserialise_object(os.path.join(self._user_base_folder, board_id + BOARD_SUFFIX))
+		return deserialise_object(join_paths(self._user_base_folder, board_id + BOARD_SUFFIX))
