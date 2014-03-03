@@ -4,7 +4,7 @@ import uuid
 class Column():
     def __init__(self, title):
         self.__title = title
-        self.__id = uuid.uuid4()
+        self.__id = str(uuid.uuid4())
 
     def get_title(self):
         return self.__title

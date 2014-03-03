@@ -1,6 +1,7 @@
 from server.KanbanModel.Board import Board
 import json
 
+
 class BoardApiEndPoint(object):
     exposed = True
 

@@ -1,7 +1,10 @@
 import unittest
+
 import requests
 import cherrypy
+
 from server.api.BoardApiEndPoint import BoardApiEndPoint
+from server.test.api.PersistenceMock import PersistenceMock
 
 
 class BoardApiTest(unittest.TestCase):
@@ -23,12 +26,6 @@ class BoardApiTest(unittest.TestCase):
         response = requests.post('http://localhost:8080/api/board', params={'name': "Important Things"})
         self.assertEqual(200, response.status_code)
         self.assertIn("Important Things", response.text)
-
-
-class PersistenceMock(object):
-
-    def save(self, board):
-        pass
 
 
 if __name__ == '__main__':

@@ -1,10 +1,8 @@
 import unittest
-
 import cherrypy
 import requests
-
-from server.api.ColumnApiTest import ColumnApiEndPoint
-from server.test.api.BoardApiTest import PersistenceMock
+from server.api.ColumnApiEndPoint import ColumnApiEndPoint
+from server.test.api.PersistenceMock import PersistenceMock
 
 
 class ColumnApiTest(unittest.TestCase):
@@ -23,7 +21,7 @@ class ColumnApiTest(unittest.TestCase):
         cherrypy.engine.exit()
 
     def test_create_column_api_call(self):
-        response = requests.post('http://localhost:8080/api/column', {'name': 'Almost more important things'})
+        response = requests.post('http://localhost:8080/api/column', {'title': 'Almost more important things'})
         self.assertEqual(200, response.status_code)
         self.assertIn('Almost more important things', response.text)
 
