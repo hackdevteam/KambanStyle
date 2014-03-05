@@ -18,23 +18,34 @@ function Main() {
 
     this.initJquery = new function() {
         $(function() {
-            $("body").load("api.php/api/" + lista['loadBoard']);
+
+            $.ajax({
+                url: "api.php",
+                type: "post",
+                data: {"valor" : "load"},
+                dataType: 'jsonp',
+                success: function(response) {
+                    $.each(response, function(indice, valor) {
+                        $("body").html(valor);
+                    });
+                },
+                contentType: "application/json"
+            });
 
             $(document).click(function(event) {
-                
+
                 $.ajax({
-                    url: 'api.php/api/' + lista[event.target.id]   ,
+                    url: 'api.php/api/' + lista['loadBoard'],
                     dataType: 'jsonp',
-                    
                     success: function(response) {
                         $.each(response, function(indice, valor) {
                             $(indice).html(valor);
                         });
                     }
-                });                
+                });
             });
         });
-    };  
+    };
 }
 
 
