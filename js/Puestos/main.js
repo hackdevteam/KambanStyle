@@ -1,12 +1,14 @@
 
 var lista = new Array();
-lista ['createBoard'] = "create/board";
-lista ['createColumn'] = "create/column";
-lista ['createTask'] = "create/task";
+lista['createBoard'] = "create/board";
+lista['createColumn'] = "create/column";
+lista['createTask'] = "create/task";
 
-lista ['loadBoard'] = "load/board";
-lista ['loadColumn'] = "load/column";
-lista ['loadTask'] = "load/task";
+lista['loadBoard'] = "load/board";
+lista['loadColumn'] = "load/column";
+lista['loadTask'] = "load/task";
+
+
 
 
 
@@ -17,20 +19,8 @@ function Main() {
     };
 
     this.initJquery = new function() {
-        $(function() {
-
-            $.ajax({
-                url: "api.php",
-                type: "post",
-                data: {"valor" : "load"},
-                dataType: 'jsonp',
-                success: function(response) {
-                    $.each(response, function(indice, valor) {
-                        $("body").html(valor);
-                    });
-                },
-                contentType: "application/json"
-            });
+        $(function() {    
+            getBoard();
 
             $(document).click(function(event) {
 
@@ -45,6 +35,17 @@ function Main() {
                 });
             });
         });
+    };
+
+    this.getBoard = new function() {
+        $.get("api.php/" + lista['loadBoard'],
+                {valor: "Board"},
+                function(response) {          
+                    //$('#template').tmpl(response).appendTo('body');
+                    $("body").html(response);
+                },
+                "json"
+                );
     };
 }
 

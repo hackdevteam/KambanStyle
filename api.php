@@ -16,8 +16,13 @@
     }*/
        
    
-    $arr["body"] = json_decode($_POST['valor']);
+    $arr["name"] = "Victor";    
+    $arr["content"] = "Probando probando";
+    
+    json_econde($arr);
+    
+    //echo json_encode($url);
     
     
-    echo $_GET['callback']."(".json_encode($arr).");";
+    //echo $_GET['callback']."(".json_encode($arr).");";
 ?>
