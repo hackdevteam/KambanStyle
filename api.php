@@ -2,24 +2,13 @@
 
     ini_set("display_errors", 1);
     
-    $url=$_SERVER['REQUEST_URI'];
-
-   
-   
-    
-    /*$values = split("/", $url);
-      
-    foreach ($values as $value){
-        if ($value != "" ){
-            echo $value;
-        }
-    }*/
+    $url=$_SERVER['REQUEST_URI'];  
        
-   
-    $arr["name"] = "Victor";    
-    $arr["content"] = "Probando probando";
     
-    json_econde($arr);
+    $data["name"] = "Victor";
+    $data["content"] = "prueba";
+   
+    echo json_encode($data);
     
     //echo json_encode($url);
     
