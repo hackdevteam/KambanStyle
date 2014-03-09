@@ -8,10 +8,6 @@ lista['loadBoard'] = "load/board";
 lista['loadColumn'] = "load/column";
 lista['loadTask'] = "load/task";
 
-
-
-
-
 //  ---- Class Main
 function Main() {
     this.init = function() {
@@ -39,16 +35,14 @@ function Main() {
 
     this.getBoard = new function() {
         $.get("api.php/" + lista['loadBoard'],
-                {valor: "Board"},
-                function(response) {          
-                    $('#template').tmpl(response).appendTo('body');
-                    //$("body").html(response);
-                },
-                "json"
-                );
+            {valor: "Board"},
+            function(response) {          
+                $('#board').tmpl(response).appendTo('body');
+            },
+            "json"
+        );
     };
 }
-
 
 main = new Main();
 main.init();
