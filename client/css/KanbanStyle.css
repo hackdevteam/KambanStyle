@@ -7,7 +7,7 @@ body {
 	background-color: #84775D;
 }
 
-#header{
+header{
 	background-color: #FFFFE9;
 	border-radius: 20px;
 	box-shadow: 5px 5px 5px #3A2500;
@@ -15,19 +15,19 @@ body {
 }
 
 
-#header h1{
+header h1{
 	font-style: italic;
 	color: rgb(255,255,255);
 	text-shadow: black 0.1em 0.1em 0.2em;
 }
 
 
-#content, #footer, #header, #registerdiv{
-	background: #E3D77F;
+article, footer, header{
+	background-color: #E3D77F;
 	box-shadow: 5px 5px 5px #3A2500;
 }
 
-#content{
+article{
 	border-radius: 5px;
 	width: 90%;
 	height: 80%;
@@ -35,27 +35,14 @@ body {
 	left: 5%;
 }
 
-#content:hover, #footer:hover, #header:hover, #registerdiv:hover{
+article:hover, footer:hover, header:hover{
 	box-shadow: 10px 10px 10px #3A2500;
 }
 
-#footer{
+footer{
 	border-radius: 20px;
 	height: 5%;
 	text-align: center;	
-}
-
-
-#registerdiv{
-	margin-left: 35%;
-	margin-top: 10%;
-	height: 40%;
-	width: 30%;
-	border-radius: 20px;
-}
-
-#registerdiv h2, #registerdiv p{
-	text-align: center;
 }
 
 .column{
