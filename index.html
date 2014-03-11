@@ -15,13 +15,51 @@
         
         <script src="js/Puestos/main.js"></script>
 
-        <script id='board' type='text/x-jquery-tmpl'>
-            <h1>${name}</h1>
-            <p>${content}</p>
+        <script id='templateBoard' type='text/x-jquery-tmpl'>
+            <div id='board'>
+                <div id='title'>
+                    <h1>${title}</h1>
+                </div>
+                <div id='content'>
+                    <p>${content}</p>
+                </div>
+            </div>  
+        </script> 
+        
+        <script id='templateColumn' type='text/x-jquery-tmpl'>
+            <div id='column'>
+                <div id='title'>
+                    <h1>${title}</h1>
+                </div>
+                <div id='listTask'>
+                    <p>${listTask}</p>
+                </div>
+            </div>  
+        </script> 
+        
+        <script id='templateTask' type='text/x-jquery-tmpl'>
+            <div id='task' class = '${taskColor}'>
+                <div id='title'>
+                    <h1>${title}</h1>
+                </div>
+                <div id='description'>
+                    <p>${description}</p>
+                </div>
+            </div>  
+        </script> 
+        
+        <script id='template' type='text/x-jquery-tmpl'>
+            <header>
+                ${title}
+            </header>
+            <article>
+                ${content}
+            </artivle>
+            <footer>
+                ${footer}
+            </footer>
         </script>
         
-        
-
     </head>
     <body>        
     </body>

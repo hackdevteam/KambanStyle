@@ -37,7 +37,7 @@ function Main() {
         $.get("api.php/" + lista['loadBoard'],
             {valor: "Board"},
             function(response) {          
-                $('#board').tmpl(response).appendTo('body');
+                $('#template').tmpl(response).appendTo('body');
             },
             "json"
         );
