@@ -11,36 +11,22 @@ lista['loadTask'] = "load/task";
 //  ---- Class Main
 function Main() {
     this.init = function() {
-        initJquery();
+        this.initJquery;
     };
 
     this.initJquery = new function() {
         $(function() {    
-            getBoard();
-
-            $(document).click(function(event) {
-
-                $.ajax({
-                    url: 'api.php/api/' + lista['loadBoard'],
-                    dataType: 'jsonp',
-                    success: function(response) {
-                        $.each(response, function(indice, valor) {
-                            $(indice).html(valor);
-                        });
-                    }
-                });
-            });
+            this.getBoard;
         });
     };
 
     this.getBoard = new function() {
-        $.get("api.php/" + lista['loadBoard'],
-            {valor: "Board"},
-            function(response) {          
-                $('#template').tmpl(response).appendTo('body');
-            },
-            "json"
-        );
+        $.post("localhost/api/board",
+        {title: "nuevo"},
+        function (response){
+           $('#template').tmpl(response).appendTo('body');
+        },
+        "json");
     };
 }
 
