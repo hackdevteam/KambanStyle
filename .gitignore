@@ -1,2 +1,5 @@
-api.php
-nbproject/private/private.xml
+*.php
+nbproject/*
+.idea
+*.pyc
+build.xml
