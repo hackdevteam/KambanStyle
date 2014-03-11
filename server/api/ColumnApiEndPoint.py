@@ -1,5 +1,6 @@
 import json
-from server.KanbanModel.Column import Column
+from uuid import uuid4
+from server.kamban.model.Column import Column
 
 
 class ColumnApiEndPoint(object):
@@ -9,6 +10,6 @@ class ColumnApiEndPoint(object):
         self.__persistance = persistence
 
     def POST(self, title):
-        column = Column(title)
+        column = Column(title, str(uuid4()))
         self.__persistance.save(column)
-        return json.dumps({"name": column.get_title(), "id": column.get_id()})
+        return json.dumps({"name": column.get_title(), "id": column.get_id(), "board_id": column.get_board_id()})
