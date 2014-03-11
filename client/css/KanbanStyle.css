@@ -1,0 +1,82 @@
+/*
+	# -> ID
+	. -> Class
+*/
+
+body {
+	background-color: #84775D;
+}
+
+header{
+	background-color: #FFFFE9;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px #3A2500;
+	text-align: center;
+}
+
+
+header h1{
+	font-style: italic;
+	color: rgb(255,255,255);
+	text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+
+article, footer, header{
+	background-color: #E3D77F;
+	box-shadow: 5px 5px 5px #3A2500;
+}
+
+article{
+	border-radius: 5px;
+	width: 90%;
+	height: 80%;
+	position: relative;
+	left: 5%;
+}
+
+article:hover, footer:hover, header:hover{
+	box-shadow: 10px 10px 10px #3A2500;
+}
+
+footer{
+	border-radius: 20px;
+	height: 5%;
+	text-align: center;	
+}
+
+.column{
+	background-color: #F5F5F5;
+	height: 80%;
+	width: 10%;
+	border-radius: 5px;
+	box-shadow: 5px 5px 5px #3A2500;
+}
+
+.column h2 {
+	font-style: italic;
+}
+
+.Task{
+	height: 15%;
+	width: 10%;
+	border-radius: 5px;
+	box-shadow: 5px 5px 5px #3A2500;
+}
+
+.Task:hover{
+}
+
+.Task #red{
+	background-color: rgb(183,70,70);
+}
+
+.Task #green{
+	background-color: rgb(70,183,70);
+
+}
+
+.Task #blue{
+	background-color: rgb(70,70,183);
+}
+
