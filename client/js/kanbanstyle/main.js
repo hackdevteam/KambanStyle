@@ -34,8 +34,7 @@ function Main() {
     this.getColumn = new function() {
         $.post("column.php",
         {idb : "001", title: "FirtsColumn"},
-        function (response){          
-           var id = response.idc;
+        function (response){           
            $('#templateColumn').tmpl(response).appendTo('#column-area');
         },
         "json");
@@ -46,6 +45,8 @@ function Main() {
            $('#templateColumn').tmpl(response).appendTo('#column-area');
         },
         "json");
+        
+       
     };
     
      this.getTask = new function() {
@@ -57,7 +58,7 @@ function Main() {
         "json");
         
         $.post("task.php",
-        {idc : "001c", title: "SecondColumn", description : "Segund Tarea"},
+        {idc : "001c", title: "SecondTask", description : "Segund Tarea"},
         function (response){           
            $('#templateTask').tmpl(response).appendTo('#'+response.idc+'-list-task-area');
         },

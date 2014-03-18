@@ -26,17 +26,17 @@
         </script> 
         
         <script id='templateColumn' type='text/x-jquery-tmpl'>
-            <div id='${id}'>
+            <div id='${idc}' class = "column">
                 <h1>${title}</h1>
-                <ul id="${id}-list-task-area"></ul>
+                <ul id="${idc}-list-task-area" class="list-task"></ul>
             </div>  
         </script> 
         
         <script id='templateTask' type='text/x-jquery-tmpl'>
-            <li id = ${id}>
+            <div id = ${idt} class ="Task">
                 <h2>${title}</h2>
                 <p>${description}</p>
-            </li>
+            </div>
         </script> 
         
         <script id='template' type='text/x-jquery-tmpl'>
@@ -52,6 +52,6 @@
         </script>
         
     </head>
-    <body>        
+    <body>
     </body>
 </html>
