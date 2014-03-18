@@ -3,7 +3,7 @@ import unittest
 from server.kamban.model.Board import Board
 
 from server.persistence.filesystem.UserBoardsManager import UserBoardsManager
-from server.test.persistence.commons import remove_data, serialize_object
+from server.test.persistence.filesystem.commons import remove_data, serialize_object
 
 BASE_FOLDER = os.path.abspath("../resources")
 
