@@ -15,36 +15,28 @@
         <script src="js/kanbanstyle/main.js"></script>
 
         <script id='templateBoard' type='text/x-jquery-tmpl'>
-            <div id='board'>
+            <div id='${id}'>
                 <div id='title'>
                     <h1>${title}</h1>
                 </div>
                 <div id='content'>
-                    <p>${content}</p>
+                    <ul id="column-area"></ul>
                 </div>
             </div>  
         </script> 
         
         <script id='templateColumn' type='text/x-jquery-tmpl'>
-            <div id='column'>
-                <div id='title'>
-                    <h1>${title}</h1>
-                </div>
-                <div id='listTask'>
-                    <p>${listTask}</p>
-                </div>
+            <div id='${id}'>
+                <h1>${title}</h1>
+                <ul id="${id}-list-task-area"></ul>
             </div>  
         </script> 
         
         <script id='templateTask' type='text/x-jquery-tmpl'>
-            <div id='task' class = '${taskColor}'>
-                <div id='title'>
-                    <h1>${title}</h1>
-                </div>
-                <div id='description'>
-                    <p>${description}</p>
-                </div>
-            </div>  
+            <li id = ${id}>
+                <h2>${title}</h2>
+                <p>${description}</p>
+            </li>
         </script> 
         
         <script id='template' type='text/x-jquery-tmpl'>
