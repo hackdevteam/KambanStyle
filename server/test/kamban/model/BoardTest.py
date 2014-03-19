@@ -1,5 +1,5 @@
 import unittest
-from server.kamban.model.Board import Board
+from server.kanban.model.Board import Board
 
 
 class BordTest(unittest.TestCase):

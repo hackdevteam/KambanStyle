@@ -1,6 +1,6 @@
 import json
 from uuid import uuid4
-from server.kamban.model.Column import Column
+from server.kanban.model.Column import Column
 
 
 class ColumnApiEndPoint(object):

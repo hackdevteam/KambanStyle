@@ -1,7 +1,7 @@
 import unittest
 from uuid import uuid4
 
-from server.kamban.model.Column import Column
+from server.kanban.model.Column import Column
 
 
 class ColumnTest(unittest.TestCase):

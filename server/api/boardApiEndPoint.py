@@ -1,4 +1,4 @@
-from server.KanbanModel.Board import Board
+from server.kanban.model.Board import Board
 import json
 
 

@@ -1,7 +1,7 @@
 import os
 import unittest
-from server.kamban.model.Column import Column
-from server.kamban.model.Task import Task
+from server.kanban.model.Column import Column
+from server.kanban.model.Task import Task
 
 from server.persistence.filesystem.BoardManager import BoardManager
 from server.test.persistence.filesystem.commons import remove_data, serialize_object

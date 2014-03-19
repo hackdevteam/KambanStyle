@@ -1,5 +1,5 @@
 import unittest
-from server.kamban.model.Task import Task
+from server.kanban.model.Task import Task
 
 
 class TaskTest(unittest.TestCase):

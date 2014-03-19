@@ -1,6 +1,6 @@
 import os
 import unittest
-from server.kamban.model.Board import Board
+from server.kanban.model.Board import Board
 
 from server.persistence.filesystem.UserBoardsManager import UserBoardsManager
 from server.test.persistence.filesystem.commons import remove_data, serialize_object
