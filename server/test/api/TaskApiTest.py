@@ -2,24 +2,23 @@ import unittest
 import cherrypy
 import requests
 from server.api.TaskApiEndPoint import TaskApiEndPoint
-from server.test.api.PersistenceMock import PersistenceMock
+from server.persistence.filesystem.BoardManager import BoardManager
+from server.test import Commons
 
 
 class TaskApiTest(unittest.TestCase):
     def setUp(self):
         cherrypy.tree.mount(
-            TaskApiEndPoint(PersistenceMock()), '/api/task',
+            TaskApiEndPoint(BoardManager(Commons.BASE_FOLDER)), '/api/task',
             {'/':
                  {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
             }
         )
         cherrypy.engine.start()
 
-
     def tearDown(self):
         cherrypy.engine.stop()
         cherrypy.engine.exit()
-    
 
     def test_create_task(self):
         response = requests.post('http://localhost:8080/api/task',

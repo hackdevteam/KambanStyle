@@ -2,14 +2,15 @@ import unittest
 import cherrypy
 import requests
 from server.api.ColumnApiEndPoint import ColumnApiEndPoint
-from server.test.api.PersistenceMock import PersistenceMock
+from server.persistence.filesystem.BoardManager import BoardManager
+from server.test import Commons
 
 
 class ColumnApiTest(unittest.TestCase):
 
     def setUp(self):
         cherrypy.tree.mount(
-            ColumnApiEndPoint(PersistenceMock()), '/api/column',
+            ColumnApiEndPoint(BoardManager(Commons.BASE_FOLDER)), '/api/column',
             {'/':
                  {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
             }

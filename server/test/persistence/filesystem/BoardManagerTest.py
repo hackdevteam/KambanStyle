@@ -4,7 +4,7 @@ from server.kamban.model.Board import Board
 from server.kamban.model.Column import Column
 from server.kamban.model.Task import Task
 from server.persistence.filesystem.BoardManager import BoardManager
-from server.test.commons import *
+from server.test.Commons import *
 
 
 class BoardManagerTest(unittest.TestCase):

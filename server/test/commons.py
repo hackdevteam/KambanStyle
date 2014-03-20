@@ -4,6 +4,7 @@ import shutil
 
 BASE_FOLDER = os.path.abspath("../../resources")
 TEST_BOARD_ID = "test_board"
+TEST_BOARD_COLUMN_ID = "test_column"
 
 
 def remove_data(data_path):

@@ -4,14 +4,15 @@ import requests
 import cherrypy
 
 from server.api.BoardApiEndPoint import BoardApiEndPoint
-from server.test.api.PersistenceMock import PersistenceMock
+from server.persistence.filesystem.BoardManager import BoardManager
+from server.test import Commons
 
 
 class BoardApiTest(unittest.TestCase):
 
     def setUp(self):
         cherrypy.tree.mount(
-            BoardApiEndPoint(PersistenceMock()), '/api/board',
+            BoardApiEndPoint(BoardManager(Commons.BASE_FOLDER)), '/api/board',
             {'/':
                  {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
             }
