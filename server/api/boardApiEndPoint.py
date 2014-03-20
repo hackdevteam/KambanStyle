@@ -1,4 +1,4 @@
-from server.KanbanModel.Board import Board
+from server.kamban.model.Board import Board
 import json
 
 
@@ -10,5 +10,5 @@ class BoardApiEndPoint(object):
 
     def POST(self, name):
         board = Board(name)
-        self.__persistence.save(board)
-        return json.dumps({"name": board.get_name(), "id": board.get_id()})
+        self.__persistence.save_board(board)
+        return json.dumps({"name": board.get_title(), "id": board.get_id()})

@@ -4,14 +4,17 @@ import requests
 import cherrypy
 
 from server.api.BoardApiEndPoint import BoardApiEndPoint
-from server.test.api.PersistenceMock import PersistenceMock
+from server.persistence.filesystem.BoardManager import BoardManager
+from server.test import Commons
+from server.test.Commons import remove_data, BASE_FOLDER
 
 
 class BoardApiTest(unittest.TestCase):
 
     def setUp(self):
+        remove_data(BASE_FOLDER)
         cherrypy.tree.mount(
-            BoardApiEndPoint(PersistenceMock()), '/api/board',
+            BoardApiEndPoint(BoardManager(Commons.BASE_FOLDER)), '/api/board',
             {'/':
                  {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
             }
@@ -21,6 +24,7 @@ class BoardApiTest(unittest.TestCase):
     def tearDown(self):
         cherrypy.engine.stop()
         cherrypy.engine.exit()
+        remove_data(BASE_FOLDER)
 
     def test_create_board_api_call(self):
         response = requests.post('http://localhost:8080/api/board', params={'name': "Important Things"})

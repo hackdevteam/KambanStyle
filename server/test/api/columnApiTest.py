@@ -2,14 +2,17 @@ import unittest
 import cherrypy
 import requests
 from server.api.ColumnApiEndPoint import ColumnApiEndPoint
-from server.test.api.PersistenceMock import PersistenceMock
+from server.persistence.filesystem.BoardManager import BoardManager
+from server.test import Commons
+from server.test.Commons import remove_data, BASE_FOLDER
 
 
 class ColumnApiTest(unittest.TestCase):
 
     def setUp(self):
+        remove_data(BASE_FOLDER)
         cherrypy.tree.mount(
-            ColumnApiEndPoint(PersistenceMock()), '/api/column',
+            ColumnApiEndPoint(BoardManager(Commons.BASE_FOLDER)), '/api/column',
             {'/':
                  {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
             }
@@ -19,9 +22,11 @@ class ColumnApiTest(unittest.TestCase):
     def tearDown(self):
         cherrypy.engine.stop()
         cherrypy.engine.exit()
+        remove_data(BASE_FOLDER)
 
     def test_create_column_api_call(self):
-        response = requests.post('http://localhost:8080/api/column', {'title': 'Almost more important things'})
+        response = requests.post('http://localhost:8080/api/column', {'title': 'Almost more important things',
+                                                                      'board_id': Commons.TEST_BOARD_ID})
         self.assertEqual(200, response.status_code)
         self.assertIn('Almost more important things', response.text)
 
