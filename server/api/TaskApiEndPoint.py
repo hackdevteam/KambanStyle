@@ -7,7 +7,7 @@ class TaskApiEndPoint(object):
     exposed = True
 
     def __init__(self, persistence):
-        self.__persistance = persistence
+        super.__persistance = persistence
 
     def POST(self, title, description):
         task = Task(title, description, str(uuid4()))

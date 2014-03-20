@@ -3,7 +3,7 @@ from server.persistence.database.DataMapper import DataMapper
 
 class BoardDataMapper(DataMapper):
   def __init__(self):
-    super().__init__()
+    super.__init__()
 
   def insert(self, board):
     self.query = "INSERT INTO board (title) VALUES(?)"
