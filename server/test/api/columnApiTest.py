@@ -4,11 +4,13 @@ import requests
 from server.api.ColumnApiEndPoint import ColumnApiEndPoint
 from server.persistence.filesystem.BoardManager import BoardManager
 from server.test import Commons
+from server.test.Commons import remove_data, BASE_FOLDER
 
 
 class ColumnApiTest(unittest.TestCase):
 
     def setUp(self):
+        remove_data(BASE_FOLDER)
         cherrypy.tree.mount(
             ColumnApiEndPoint(BoardManager(Commons.BASE_FOLDER)), '/api/column',
             {'/':
@@ -20,6 +22,7 @@ class ColumnApiTest(unittest.TestCase):
     def tearDown(self):
         cherrypy.engine.stop()
         cherrypy.engine.exit()
+        remove_data(BASE_FOLDER)
 
     def test_create_column_api_call(self):
         response = requests.post('http://localhost:8080/api/column', {'title': 'Almost more important things',
