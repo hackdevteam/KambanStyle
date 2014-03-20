@@ -1,14 +1,10 @@
-import os
 import unittest
+
 from server.kamban.model.Board import Board
 from server.kamban.model.Column import Column
 from server.kamban.model.Task import Task
-
 from server.persistence.filesystem.BoardManager import BoardManager
-from server.test.persistence.filesystem.commons import remove_data, serialize_object
-
-BASE_FOLDER = os.path.abspath("../../resources")
-TEST_BOARD_ID = "test_board"
+from server.test.commons import *
 
 
 class BoardManagerTest(unittest.TestCase):

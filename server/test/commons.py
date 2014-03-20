@@ -2,6 +2,9 @@ import os
 import pickle
 import shutil
 
+BASE_FOLDER = os.path.abspath("../../resources")
+TEST_BOARD_ID = "test_board"
+
 
 def remove_data(data_path):
     if os.path.exists(data_path):
