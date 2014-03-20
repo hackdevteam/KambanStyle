@@ -34,5 +34,12 @@ def list_files(path):
         return files
 
 
+def find_parent_name(directory, child):
+    for dir_name, directories, files in os.walk(directory):
+        if (child in directories) | (child in files):
+            return os.path.basename(dir_name)
+
+
 def remove(file_name):
-    os.remove(file_name)
+    if os.path.exists(file_name):
+        os.remove(file_name)
