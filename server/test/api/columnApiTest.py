@@ -22,7 +22,8 @@ class ColumnApiTest(unittest.TestCase):
         cherrypy.engine.exit()
 
     def test_create_column_api_call(self):
-        response = requests.post('http://localhost:8080/api/column', {'title': 'Almost more important things'})
+        response = requests.post('http://localhost:8080/api/column', {'title': 'Almost more important things',
+                                                                      'board_id': Commons.TEST_BOARD_ID})
         self.assertEqual(200, response.status_code)
         self.assertIn('Almost more important things', response.text)
 

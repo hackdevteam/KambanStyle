@@ -22,7 +22,9 @@ class TaskApiTest(unittest.TestCase):
 
     def test_create_task(self):
         response = requests.post('http://localhost:8080/api/task',
-                                 {'title': 'Thing to do', 'description': 'Important thing to do'})
+                                 {'title': 'Thing to do',
+                                  'description': 'Important thing to do',
+                                  'column_id': Commons.TEST_BOARD_COLUMN_ID})
         self.assertEqual(200, response.status_code)
         self.assertIn('Thing to do', response.text)
 
