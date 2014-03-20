@@ -2,7 +2,7 @@ import os
 import pickle
 import shutil
 
-BASE_FOLDER = os.path.abspath("../../resources")
+BASE_FOLDER = os.path.abspath("../../filesystem_test")
 TEST_BOARD_ID = "test_board"
 TEST_BOARD_COLUMN_ID = "test_column"
 
