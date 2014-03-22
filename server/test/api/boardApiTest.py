@@ -4,6 +4,7 @@ import requests
 import cherrypy
 
 from server.api.BoardApiEndPoint import BoardApiEndPoint
+
 from server.kamban.Url import Url
 from server.persistence.PersistenceManager import PersistenceManager
 from server.persistence.filesystem.FilesystemPersistence import FilesystemPersistence

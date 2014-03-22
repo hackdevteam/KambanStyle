@@ -23,7 +23,7 @@ function Main() {
     };
 
     this.getBoard = new function() {
-        $.post("board.php",
+        $.post("api/board",
         {title: "NewBoard"},
         function (response){           
            $('#templateBoard').tmpl(response).appendTo('body');
