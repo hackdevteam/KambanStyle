@@ -6,7 +6,7 @@ import requests
 from server.api.TaskApiEndPoint import TaskApiEndPoint
 from server.kamban.Url import Url
 from server.kamban.model.Column import Column
-from server.persistency.filesystem.BoardManager import BoardManager
+from server.persistency.filesystem.FilesystemPersistence import FilesystemPersistence
 from server.test import Commons
 from server.test.Commons import remove_data, BASE_FOLDER
 
@@ -14,7 +14,7 @@ from server.test.Commons import remove_data, BASE_FOLDER
 class TaskApiTest(unittest.TestCase):
     def setUp(self):
         remove_data(BASE_FOLDER)
-        board_manager = BoardManager(Url(Url.SCHEME_FILE, "localhost", BASE_FOLDER))
+        board_manager = FilesystemPersistence(Url(Url.SCHEME_FILE, "localhost", BASE_FOLDER))
         cherrypy.tree.mount(
             TaskApiEndPoint(board_manager), '/api/task',
             {'/':

@@ -4,7 +4,7 @@ COLUMN_PROPERTIES_SUFFIX = ".clm"
 BOARD_PROPERTIES_SUFFIX = ".brd"
 
 
-class BoardManager():
+class FilesystemPersistence():
     def __init__(self, database_url):
         self._working_directory = database_url.get_resource()
 
