@@ -32,32 +32,30 @@ function Main() {
     };
     
     this.getColumn = new function() {
-        $.post("column.php",
+        $.post("api/board",
         {idb : "001", title: "FirtsColumn"},
         function (response){           
            $('#templateColumn').tmpl(response).appendTo('#column-area');
         },
         "json");
         
-        $.post("column.php",
+        $.post("api/board",
         {idb : "001", title: "SecondColumn"},
         function (response){           
            $('#templateColumn').tmpl(response).appendTo('#column-area');
         },
         "json");
-        
-       
     };
     
      this.getTask = new function() {
-        $.post("task.php",
+        $.post("api/task",
         {idc : "001c", title: "FirtsTask", description : "Primera Tarea"},
         function (response){  
            $('#templateTask').tmpl(response).appendTo('#'+response.idc+'-list-task-area');
         },
         "json");
         
-        $.post("task.php",
+        $.post("api/task",
         {idc : "001c", title: "SecondTask", description : "Segund Tarea"},
         function (response){           
            $('#templateTask').tmpl(response).appendTo('#'+response.idc+'-list-task-area');
