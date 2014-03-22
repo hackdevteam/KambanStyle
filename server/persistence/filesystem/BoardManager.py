@@ -5,8 +5,8 @@ BOARD_PROPERTIES_SUFFIX = ".brd"
 
 
 class BoardManager():
-    def __init__(self, base_directory):
-        self._working_directory = base_directory
+    def __init__(self, database_url):
+        self._working_directory = database_url.get_resource()
 
     def get_boards_ids(self):
         return list_directories(self._working_directory)

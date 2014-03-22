@@ -1,4 +1,5 @@
 import unittest
+from server.kamban.Url import Url
 
 from server.kamban.model.Board import Board
 from server.kamban.model.Column import Column
@@ -10,7 +11,7 @@ from server.test.Commons import *
 class BoardManagerTest(unittest.TestCase):
     def setUp(self):
         remove_data(BASE_FOLDER)
-        self.board_manager = BoardManager(BASE_FOLDER)
+        self.board_manager = BoardManager(Url(Url.SCHEME_FILE, "localhost", BASE_FOLDER))
 
     def tearDown(self):
         remove_data(BASE_FOLDER)
