@@ -1,4 +1,4 @@
-from server.persistence.filesystem.operating_system import *
+from server.persistency.filesystem.operating_system import *
 
 COLUMN_PROPERTIES_SUFFIX = ".clm"
 BOARD_PROPERTIES_SUFFIX = ".brd"

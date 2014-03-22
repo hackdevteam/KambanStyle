@@ -1,5 +1,5 @@
 
-from server.persistence.database.DataMapper import DataMapper
+from server.persistency.database.DataMapper import DataMapper
 
 
 class TaskDataMapper(DataMapper):
