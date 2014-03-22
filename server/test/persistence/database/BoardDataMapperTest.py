@@ -1,6 +1,6 @@
 import unittest
 from server.kamban.model.Board import Board
-from server.persistency.database.BoardDataMapper import BoardDataMapper
+from server.persistence.database.BoardDataMapper import BoardDataMapper
 
 
 class BoardDataMapperTest(unittest.TestCase):

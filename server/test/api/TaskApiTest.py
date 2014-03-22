@@ -6,7 +6,7 @@ import requests
 from server.api.TaskApiEndPoint import TaskApiEndPoint
 from server.kamban.Url import Url
 from server.kamban.model.Column import Column
-from server.persistency.filesystem.FilesystemPersistence import FilesystemPersistence
+from server.persistence.filesystem.FilesystemPersistence import FilesystemPersistence
 from server.test import Commons
 from server.test.Commons import remove_data, BASE_FOLDER
 
