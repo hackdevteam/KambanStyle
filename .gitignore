@@ -1,3 +1,7 @@
+*.php
+nbproject
 .idea
 *.pyc
 /server/filesystem_test
+build.xml
+*.iml
