@@ -4,6 +4,7 @@ import cherrypy
 import requests
 
 from server.api.TaskApiEndPoint import TaskApiEndPoint
+from server.kamban.Url import Url
 from server.kamban.model.Column import Column
 from server.persistence.filesystem.BoardManager import BoardManager
 from server.test import Commons
@@ -13,15 +14,16 @@ from server.test.Commons import remove_data, BASE_FOLDER
 class TaskApiTest(unittest.TestCase):
     def setUp(self):
         remove_data(BASE_FOLDER)
+        board_manager = BoardManager(Url(Url.SCHEME_FILE, "localhost", BASE_FOLDER))
         cherrypy.tree.mount(
-            TaskApiEndPoint(BoardManager(Commons.BASE_FOLDER)), '/api/task',
+            TaskApiEndPoint(board_manager), '/api/task',
             {'/':
                  {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
             }
         )
         cherrypy.engine.start()
         self.column = Column("a column", Commons.TEST_BOARD_ID)
-        BoardManager(BASE_FOLDER).save_column(self.column)
+        board_manager.save_column(self.column)
 
     def tearDown(self):
         cherrypy.engine.stop()
