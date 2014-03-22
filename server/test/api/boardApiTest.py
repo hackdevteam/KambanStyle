@@ -4,7 +4,9 @@ import requests
 import cherrypy
 
 from server.api.BoardApiEndPoint import BoardApiEndPoint
-from server.persistence.filesystem.BoardManager import BoardManager
+from server.kamban.Url import Url
+from server.persistence.PersistenceManager import PersistenceManager
+from server.persistence.filesystem.FilesystemPersistence import FilesystemPersistence
 from server.test import Commons
 from server.test.Commons import remove_data, BASE_FOLDER
 
@@ -14,7 +16,7 @@ class BoardApiTest(unittest.TestCase):
     def setUp(self):
         remove_data(BASE_FOLDER)
         cherrypy.tree.mount(
-            BoardApiEndPoint(BoardManager(Commons.BASE_FOLDER)), '/api/board',
+            BoardApiEndPoint(PersistenceManager(FilesystemPersistence(Url(Url.SCHEME_FILE, "localhost", BASE_FOLDER)))), '/api/board',
             {'/':
                  {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
             }

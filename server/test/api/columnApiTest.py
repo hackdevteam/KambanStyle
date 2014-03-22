@@ -2,7 +2,9 @@ import unittest
 import cherrypy
 import requests
 from server.api.ColumnApiEndPoint import ColumnApiEndPoint
-from server.persistence.filesystem.BoardManager import BoardManager
+from server.kamban.Url import Url
+from server.persistence.PersistenceManager import PersistenceManager
+from server.persistence.filesystem.FilesystemPersistence import FilesystemPersistence
 from server.test import Commons
 from server.test.Commons import remove_data, BASE_FOLDER
 
@@ -12,7 +14,7 @@ class ColumnApiTest(unittest.TestCase):
     def setUp(self):
         remove_data(BASE_FOLDER)
         cherrypy.tree.mount(
-            ColumnApiEndPoint(BoardManager(Commons.BASE_FOLDER)), '/api/column',
+            ColumnApiEndPoint(PersistenceManager(FilesystemPersistence(Url(Url.SCHEME_FILE, "localhost", BASE_FOLDER)))), '/api/column',
             {'/':
                  {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
             }

@@ -2,7 +2,7 @@ import unittest
 from server.kamban.model.Board import Board
 
 
-class BordTest(unittest.TestCase):
+class BoardTest(unittest.TestCase):
     def test_create_board(self):
         board = Board("MyBoardName")
         self.assertEqual("MyBoardName", board.get_title())
