@@ -4,14 +4,15 @@ from server.kamban.Url import Url
 from server.kamban.model.Board import Board
 from server.kamban.model.Column import Column
 from server.kamban.model.Task import Task
+from server.persistence.PersistenceManager import PersistenceManager
 from server.persistence.filesystem.FilesystemPersistence import FilesystemPersistence
 from server.test.Commons import *
 
 
-class BoardManagerTest(unittest.TestCase):
+class FilesystemPersistenceTest(unittest.TestCase):
     def setUp(self):
         remove_data(BASE_FOLDER)
-        self.persistence = FilesystemPersistence(Url(Url.SCHEME_FILE, "localhost", BASE_FOLDER))
+        self.persistence = PersistenceManager(FilesystemPersistence(Url(Url.SCHEME_FILE, "localhost", BASE_FOLDER)))
 
     def tearDown(self):
         remove_data(BASE_FOLDER)
