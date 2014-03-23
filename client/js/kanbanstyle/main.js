@@ -1,6 +1,5 @@
 function boardCreationResponse(response) {
     $('#templateBoard').tmpl(JSON.parse(response)).appendTo(".board-area");
-    createColumn("Column 1", $(".board").attr("id"));
 }
 
 function columnCreationResponse(response) {
@@ -21,3 +20,13 @@ function createColumn(title, board_id) {
 }
 
 createBoard("Board 1");
+setTimeout(function () {
+        createColumn("Column 1", $(".board").attr("id"));
+    }
+    , 200);
+
+setTimeout(function () {
+        createColumn("Column 2", $(".board").attr("id"));
+    }
+    , 200);
+
