@@ -8,7 +8,7 @@ class BoardApiEndPoint(object):
     def __init__(self, persistence):
         self.__persistence = persistence
 
-    def POST(self, name):
-        board = Board(name)
+    def POST(self, title):
+        board = Board(title)
         self.__persistence.save_board(board)
-        return json.dumps({"name": board.get_title(), "id": board.get_id()})
+        return json.dumps({"title": board.get_title(), "board_id": board.get_id()})

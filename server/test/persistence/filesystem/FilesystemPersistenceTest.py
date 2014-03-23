@@ -18,8 +18,8 @@ class FilesystemPersistenceTest(unittest.TestCase):
         remove_data(BASE_FOLDER)
 
     def test_getting_all_the_user_boards_ids(self):
-        os.makedirs(os.path.join(BASE_FOLDER, "board 1"))
-        os.makedirs(os.path.join(BASE_FOLDER, "board 2"))
+        os.makedirs(os.path.join(BASE_FOLDER, "my_board 1"))
+        os.makedirs(os.path.join(BASE_FOLDER, "my_board 2"))
         self.assertEqual(2, len(self.persistence.get_boards_ids()))
 
     def test_save_boards_with_the_same_name(self):

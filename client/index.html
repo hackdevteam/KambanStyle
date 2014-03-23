@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Puestos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="css/KanbanStyle.css" rel="stylesheet">
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui-1.10.4.custom.js"></script>
+
+    <script src="js/jquery-tmpl/jquery.tmpl.js" type="text/javascript"></script>
+
+    <script src="js/kanbanstyle/main.js"></script>
+
+    <script id='templateBoard' type='text/x-jquery-tmpl'>
+        <div class="board" id='${board_id}'>
+            <div id='title'>
+                <h1>${title}</h1>
+            </div>
+            <div>
+                <div class="column-area"></div>
+            </div>
+        </div>
+    </script>
+
+    <script id='templateColumn' type='text/x-jquery-tmpl'>
+        <div class="column" id='${column_id}'>
+            <h1>${title}</h1>
+            <div id="${column_id}-task-area" class="list-task"></div>
+        </div>
+    </script>
+
+    <script id='templateTask' type='text/x-jquery-tmpl'>
+        <div id = ${idt} class ="Task">
+            <h2>${title}</h2>
+            <p>${description}</p>
+        </div>
+    </script>
+
+    <script id='template' type='text/x-jquery-tmpl'>
+            <header>
+                ${title}
+            </header>
+            <article>
+                ${content}
+            </article>
+            <footer>
+                ${footer}
+            </footer>
+
+
+    </script>
+
+</head>
+<body>
+<section class="board-area"></section>
+</body>
+</html>
