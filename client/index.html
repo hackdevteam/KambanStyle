@@ -15,11 +15,11 @@
         <script src="js/kanbanstyle/main.js"></script>
 
         <script id='templateBoard' type='text/x-jquery-tmpl'>
-            <div id='${id}'>
+            <div id='${board_id}'>
                 <div id='title'>
                     <h1>${title}</h1>
                 </div>
-                <div id='content'>
+                <div>
                     <ul id="column-area"></ul>
                 </div>
             </div>  
@@ -45,7 +45,7 @@
             </header>
             <article>
                 ${content}
-            </artivle>
+            </article>
             <footer>
                 ${footer}
             </footer>
@@ -53,5 +53,6 @@
         
     </head>
     <body>
+    <section class="board-area"></section>
     </body>
 </html>

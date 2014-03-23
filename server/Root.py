@@ -9,9 +9,9 @@ from server.kamban.Url import Url
 from server.persistence.PersistenceManager import PersistenceManager
 from server.persistence.filesystem.FilesystemPersistence import FilesystemPersistence
 
-API_BOARD = '/api/my_board'
-API_COLUMN = '/api/column'
-API_TASK = '/api/task'
+API_BOARD = "/api/board"
+API_COLUMN = "/api/column"
+API_TASK = "/api/task"
 
 
 class Root():
