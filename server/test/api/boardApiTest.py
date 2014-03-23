@@ -16,7 +16,7 @@ class BoardApiTest(unittest.TestCase):
         remove_data(BASE_FOLDER)
         cherrypy.tree.mount(
             BoardApiEndPoint(PersistenceManager(FilesystemPersistence(Url(Url.SCHEME_FILE, "localhost", BASE_FOLDER)))),
-            '/api/board',
+            '/api/my_board',
             {'/':
                  {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
             }
@@ -29,7 +29,7 @@ class BoardApiTest(unittest.TestCase):
         remove_data(BASE_FOLDER)
 
     def test_create_board_api_call(self):
-        response = requests.post('http://localhost:8080/api/board', params={'name': "Important Things"})
+        response = requests.post('http://localhost:8080/api/my_board', params={'name': "Important Things"})
         self.assertEqual(200, response.status_code)
         self.assertIn("Important Things", response.text)
 

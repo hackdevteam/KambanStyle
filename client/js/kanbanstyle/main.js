@@ -1,68 +1,43 @@
-
-var lista = new Array();
-lista['createBoard'] = "create/board";
-lista['createColumn'] = "create/column";
-lista['createTask'] = "create/task";
-
-lista['loadBoard'] = "load/board";
-lista['loadColumn'] = "load/column";
-lista['loadTask'] = "load/task";
-
-//  ---- Class Main
-function Main() {
-    this.init = function() {
-        this.initJquery;
-    };
-
-    this.initJquery = new function() {
-        $(function() {    
-            this.getBoard;
-            this.getColumn;
-            this.getTask;
-        });
-    };
-
-    this.getBoard = new function() {
-        $.post("api/board",
-        {title: "NewBoard"},
-        function (response){           
-           $('#templateBoard').tmpl(response).appendTo('body');
-        },
-        "json");
-    };
-    
-    this.getColumn = new function() {
-        $.post("api/board",
-        {idb : "001", title: "FirtsColumn"},
-        function (response){           
-           $('#templateColumn').tmpl(response).appendTo('#column-area');
-        },
-        "json");
-        
-        $.post("api/board",
-        {idb : "001", title: "SecondColumn"},
-        function (response){           
-           $('#templateColumn').tmpl(response).appendTo('#column-area');
-        },
-        "json");
-    };
-    
-     this.getTask = new function() {
-        $.post("api/task",
-        {idc : "001c", title: "FirtsTask", description : "Primera Tarea"},
-        function (response){  
-           $('#templateTask').tmpl(response).appendTo('#'+response.idc+'-list-task-area');
-        },
-        "json");
-        
-        $.post("api/task",
-        {idc : "001c", title: "SecondTask", description : "Segund Tarea"},
-        function (response){           
-           $('#templateTask').tmpl(response).appendTo('#'+response.idc+'-list-task-area');
-        },
-        "json");
-    };
+function Board() {
+    this.board_id = [];
+    this.columns = [];
 }
 
-main = new Main();
-main.init();
+
+$(document).ready(function () {
+    var my_board = new Board;
+    createBoard("Example", my_board);
+    createColumn("Column 1", my_board);
+    createTask("Task 1", "First task", my_board);
+    createTask("Task 2", "Second task", my_board);
+    createTask("Task 3", "Third task", my_board);
+});
+
+function createBoard(boardName) {
+    $.post("api/my_board",
+        {name: boardName},
+        function (response) {
+            my_board.board_id = response.board_id;
+            $('#templateBoard').tmpl(response).appendTo('body');
+        },
+        "json");
+}
+
+function createColumn(title, board_id) {
+    $.post("api/column",
+        {title: title, board_id: board_id},
+        function (response) {
+            my_board.columns.push(response.column_id);
+            $('#templateColumn').tmpl(response).appendTo('#column-area');
+        },
+        "json");
+}
+
+function createTask(title, description, column_id) {
+    $.post("api/task",
+        {title: title, description: description, column_id: column_id},
+        function (response) {
+            $('#templateTask').tmpl(response).appendTo('#' + response.task_id + '-list-task-area');
+        },
+        "json");
+}

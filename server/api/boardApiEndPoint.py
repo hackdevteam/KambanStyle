@@ -11,4 +11,4 @@ class BoardApiEndPoint(object):
     def POST(self, name):
         board = Board(name)
         self.__persistence.save_board(board)
-        return json.dumps({"name": board.get_title(), "id": board.get_id()})
+        return json.dumps({"name": board.get_title(), "board_id": board.get_id()})
