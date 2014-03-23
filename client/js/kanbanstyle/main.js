@@ -3,8 +3,12 @@ function boardCreationResponse(response) {
 }
 
 function columnCreationResponse(response) {
-    console.log(JSON.parse(response));
     $('#templateColumn').tmpl(JSON.parse(response)).appendTo(".column-area");
+}
+
+function taskCreationResponse(response) {
+    var jsonResponse = JSON.parse(response);
+    $('#templateTask').tmpl(jsonResponse).appendTo("#" + jsonResponse.column_id + "-task-area");
 }
 
 function createBoard(title) {
@@ -19,14 +23,41 @@ function createColumn(title, board_id) {
     })
 }
 
+function createTask(title, description, column_id) {
+    $.post("api/task", {title: title, description: description, column_id: column_id}).done(function (response) {
+        taskCreationResponse(response);
+    })
+}
+
+
 createBoard("Board 1");
 setTimeout(function () {
         createColumn("Column 1", $(".board").attr("id"));
     }
-    , 200);
+    , 100);
 
 setTimeout(function () {
         createColumn("Column 2", $(".board").attr("id"));
     }
     , 200);
 
+setTimeout(function () {
+        createTask("task 1", "description", $(".column").map(function () {
+            return $(this).attr("id");
+        }).get()[0]);
+    }
+    , 600);
+
+setTimeout(function () {
+        createTask("task 2", "description", $(".column").map(function () {
+            return $(this).attr("id");
+        }).get()[0]);
+    }
+    , 600);
+
+setTimeout(function () {
+        createTask("task 3", "description", $(".column").map(function () {
+            return $(this).attr("id");
+        }).get()[1]);
+    }
+    , 600);
