@@ -4,6 +4,7 @@ from server.persistence.database.BoardDataMapper import BoardDataMapper
 
 
 class BoardDataMapperTest(unittest.TestCase):
+
     def test_insert(self):
         mapper = BoardDataMapper()
         mapper.insert(Board("My Board"))
