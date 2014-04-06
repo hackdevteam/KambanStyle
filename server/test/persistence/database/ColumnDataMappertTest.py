@@ -7,11 +7,11 @@ class ColumnDataMapperTest(unittest.TestCase):
     def test_insert(self):
         mapper = ColumnDataMapper()
         mapper.insert(Column("My Column", 2))
-        self.assertEqual(1, mapper.retrieve("My Column").fetchall().__sizeof__())
+        self.assertEqual("My Column", mapper.retrieve("My Column").fetchone()[1])
 
     def test_retrieve(self):
         mapper = ColumnDataMapper()
-        self.assertEqual("", mapper.retrieve("FirstColumn").fetchone()[1])
+        self.assertEqual("FirstColumn", mapper.retrieve("FirstColumn").fetchone()[1])
 
 
 if __name__ == '__main__':
