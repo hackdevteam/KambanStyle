@@ -9,10 +9,11 @@ class DataMapper:
 
     def launch_query(self, *args):
         connection = connect(URL_DATABASE)
-        return connection.execute(self.query, *args)
+        result = connection.execute(self.query, *args)
+        connection.commit()
+        return result
 
     def abstract_insert(self, *args):
-        #TODO RAM memory access
         self.launch_query(*args)
 
     def abstract_retrieve(self, *args):
