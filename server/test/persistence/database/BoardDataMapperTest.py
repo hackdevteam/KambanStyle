@@ -24,7 +24,7 @@ class BoardDataMapperTest(unittest.TestCase):
 
     def test_update(self):
         mapper = BoardDataMapper()
-        mapper.update_title(self.idb, 'FirstBoardModified');
+        mapper.update_title('FirstBoardModified', self.idb)
         self.assertEqual('FirstBoardModified', mapper.retrieve('FirstBoardModified').fetchone()[1])
 
     def tearDown(self):
