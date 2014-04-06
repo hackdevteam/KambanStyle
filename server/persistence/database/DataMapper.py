@@ -18,3 +18,6 @@ class DataMapper:
 
     def abstract_retrieve(self, *args):
         return self.launch_query(*args)
+
+    def abstract_update(self, idb, title):
+        self.launch_query([title, idb])

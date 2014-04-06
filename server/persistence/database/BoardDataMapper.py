@@ -12,3 +12,8 @@ class BoardDataMapper(DataMapper):
     def retrieve(self, board_title):
         self.query = "SELECT * FROM board WHERE title=?"
         return self.abstract_retrieve([board_title, ])
+
+    def update_title(self, idb, title):
+        self.query = "UPDATE board SET title=? WHERE idb=?"
+        self.abstract_update(idb, title)
+
