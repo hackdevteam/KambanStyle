@@ -8,24 +8,26 @@ URL_DATABASE = "C:\\Users\Josue\Desktop\KanbanStyle.sqlite"
 
 class ColumnDataMapperTest(unittest.TestCase):
     def setUp(self):
+        self.mapper = ColumnDataMapper()
         self.connection = connect(URL_DATABASE)
-        self.connection.execute("INSERT INTO column (title) VALUES (\'FirstColumn\')")
+        self.connection.execute("INSERT INTO column (title, idb) VALUES (\'FirstColumn\' ,3)")
         self.idc = self.connection.execute("SELECT idc FROM column WHERE title=\'FirstColumn\'").fetchone()[0]
         self.connection.commit()
 
     def test_insert(self):
-        mapper = ColumnDataMapper()
-        mapper.insert(Column("My Column", 2))
-        self.assertEqual("My Column", mapper.retrieve("My Column").fetchone()[1])
+        self.mapper.insert(Column("My Column", 2))
+        self.assertEqual("My Column", self.mapper.retrieve("My Column").fetchone()[1])
 
     def test_retrieve(self):
-        mapper = ColumnDataMapper()
-        self.assertEqual("FirstColumn", mapper.retrieve("FirstColumn").fetchone()[1])
+        self.assertEqual("FirstColumn", self.mapper.retrieve("FirstColumn").fetchone()[1])
 
     def test_update_title(self):
-        mapper = ColumnDataMapper()
-        mapper.update_title('FirstColumnModified', self.idc)
-        self.assertEqual('FirstColumnModified', mapper.retrieve('FirstColumnModified').fetchone()[1])
+        self.mapper.update_title('FirstColumnModified', self.idc)
+        self.assertEqual('FirstColumnModified', self.mapper.retrieve('FirstColumnModified').fetchone()[1])
+
+    def test_update_idb(self):
+        self.mapper.update_idb(2, self.idc)
+        self.assertEqual(2, self.mapper.retrieve('FirstColumn').fetchone()[2])
 
     def tearDown(self):
         self.connection.execute('DELETE FROM column')

@@ -17,3 +17,7 @@ class ColumnDataMapper(DataMapper):
         self.query = "UPDATE column SET title=? WHERE idc=?"
         self.abstract_update([title, idc])
 
+    def update_idb(self, idb, idc):
+        self.query = "UPDATE column SET idb=? WHERE idc=?"
+        self.abstract_update([idb, idc])
+
