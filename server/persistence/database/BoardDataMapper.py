@@ -1,3 +1,4 @@
+from server.kamban.model.Board import Board
 from server.persistence.database.DataMapper import DataMapper
 
 
@@ -11,7 +12,8 @@ class BoardDataMapper(DataMapper):
 
     def retrieve(self, board_title):
         self.query = "SELECT * FROM board WHERE title=?"
-        return self.abstract_retrieve([board_title, ])
+        board_tuple = self.abstract_retrieve([board_title, ]).fetchone()
+        return Board(board_tuple[1])
 
     def update_title(self, title, idb):
         self.query = "UPDATE board SET title=? WHERE idb=?"

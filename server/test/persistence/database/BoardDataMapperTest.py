@@ -15,12 +15,13 @@ class BoardDataMapperTest(unittest.TestCase):
 
     def test_insert(self):
         mapper = BoardDataMapper()
-        mapper.insert(Board("My Board"))
-        self.assertEqual("My Board", mapper.retrieve("My Board").fetchone()[1])
+        board = Board("My Board")
+        mapper.insert(board)
+        self.assertEqual(board.get_title(), mapper.retrieve("My Board").get_title())
 
     def test_retrieve(self):
         mapper = BoardDataMapper()
-        self.assertEqual("FirstBoard", mapper.retrieve("FirstBoard").fetchone()[1])
+        self.assertEqual("FirstBoard", mapper.retrieve("FirstBoard").get_title())
 
     def test_update(self):
         mapper = BoardDataMapper()
