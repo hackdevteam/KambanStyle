@@ -13,4 +13,8 @@ class TaskDataMapper(DataMapper):
         self.query = "SELECT * FROM task WHERE title=?"
         return self.abstract_retrieve([title, ])
 
+    def update(self, title, description, idc, idt):
+        self.query = "UPDATE task SET title=?, description=?, idc=? WHERE idt=?"
+        self.abstract_update([title, description, idc, idt])
+
 
