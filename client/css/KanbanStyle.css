@@ -60,6 +60,11 @@ footer{
     border: 2px none;
     margin: 1%;
     float: left;
+    border-style: dashed;
+	border-width: 2px;
+	border-radius: 10px;
+	border-color: white;
+	padding: 5px;
 }
 
 .column-area{
@@ -68,7 +73,6 @@ footer{
 	height: 80%;
 	position: relative;
 	left: 5%;
-    background-color: #F5F5F5;
 }
 
 
@@ -76,9 +80,7 @@ footer{
 	font-style: italic;
 }
 
-.list-task{
-	
-}
+.list-task{}
 
 .Task{
 	-webkit-border-top-right-radius: 10px;

@@ -42,7 +42,7 @@ setTimeout(function () {
     , 200);
 
 setTimeout(function () {
-        createTask("Task 1", "description", $(".column").map(function () {
+        createTask("Task 1", "Hacer MDA", $(".column").map(function () {
             return $(this).attr("id");
         }).get()[0]);
     }
