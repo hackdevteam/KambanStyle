@@ -4,12 +4,12 @@
 */
 
 body {
-	background-color: #84775D;
+	background-color: #B9B9B9;
 }
 
 header{
-	background-color: #FFFFE9;
-	border-radius: 20px;
+	background-color: #FFFFFF;
+	border-radius: 30px;
 	box-shadow: 5px 5px 5px #3A2500;
 	text-align: center;
 }
@@ -35,58 +35,63 @@ article{
 	left: 5%;
 }
 
-article:hover, footer:hover, header:hover{
-	box-shadow: 10px 10px 10px #3A2500;
-}
-
 footer{
 	border-radius: 20px;
 	height: 5%;
 	text-align: center;	
 }
 
-.column{
-	
-	height:100%;
-	width: -moz-fit-content;
-        border: 2px none;
-        margin: 1%;
-        float: left;
+.board{
+    border-radius: 5px;
+	width: 90%;
+	height: 80%;
+	position: relative;
+	left: 5%;
+    background-color: #F5F5F5;
 }
 
-.column h2 {
+#title h1{
+	text-align: center;
+}
+
+.column{
+	height:100%;
+	width: -moz-fit-content;
+    border: 2px none;
+    margin: 1%;
+    float: left;
+}
+
+.column-area{
+	border-radius: 5px;
+	width: 90%;
+	height: 80%;
+	position: relative;
+	left: 5%;
+    background-color: #F5F5F5;
+}
+
+
+.column h1 {
 	font-style: italic;
 }
 
 .list-task{
-    background-color: #F5F5F5;
-    
-	border-radius: 5px;
-	box-shadow: 5px 5px 5px #3A2500;
+	
 }
 
 .Task{
-	height: 15%;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-right-radius: 10px;
 	width: -moz-fit-content;
-	border-radius: 5px;
+	height: 15%;
 	box-shadow: 5px 5px 5px #3A2500;
-        margin: 3%;
-        border: 2px inset;
+    background-color: #F7FE2E;
+    padding: 3px;
+    margin-bottom: 5px;
 }
 
 .Task:hover{
-}
-
-.Task #red{
-	background-color: rgb(183,70,70);
-}
-
-.Task #green{
-	background-color: rgb(70,183,70);
-
-}
-
-.Task #blue{
-	background-color: rgb(70,70,183);
 }
 

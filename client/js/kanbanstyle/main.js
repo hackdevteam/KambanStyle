@@ -42,21 +42,21 @@ setTimeout(function () {
     , 200);
 
 setTimeout(function () {
-        createTask("task 1", "description", $(".column").map(function () {
+        createTask("Task 1", "description", $(".column").map(function () {
             return $(this).attr("id");
         }).get()[0]);
     }
     , 600);
 
 setTimeout(function () {
-        createTask("task 2", "description", $(".column").map(function () {
+        createTask("Task 2", "description", $(".column").map(function () {
             return $(this).attr("id");
         }).get()[0]);
     }
     , 600);
 
 setTimeout(function () {
-        createTask("task 3", "description", $(".column").map(function () {
+        createTask("Task 3", "description", $(".column").map(function () {
             return $(this).attr("id");
         }).get()[1]);
     }
