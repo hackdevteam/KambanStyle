@@ -17,16 +17,16 @@ class MyTestCase(unittest.TestCase):
     def test_insert(self):
         mapper = TaskDataMapper()
         mapper.insert(Task("My Task", "My Description", 2))
-        self.assertEqual("My Task", mapper.retrieve_by_title("My Task").fetchone()[1])
+        self.assertEqual("My Task", mapper.retrieve_by_title("My Task").get_title())
 
     def test_retrieve(self):
         mapper = TaskDataMapper()
-        self.assertEqual("FirstTask", mapper.retrieve_by_title("FirstTask").fetchone()[1])
+        self.assertEqual("FirstTask", mapper.retrieve_by_title("FirstTask").get_title())
 
     def test_update(self):
         mapper = TaskDataMapper()
         mapper.update("FirstTaskModified", "FirstDescriptionModified", 2, self.idt)
-        self.assertEqual("FirstTaskModified", mapper.retrieve_by_title("FirstTaskModified").fetchone()[1])
+        self.assertEqual("FirstTaskModified", mapper.retrieve_by_title("FirstTaskModified").get_title())
 
     def tearDown(self):
         self.connection.execute('DELETE FROM task')

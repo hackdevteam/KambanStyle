@@ -19,11 +19,11 @@ class ColumnDataMapperTest(unittest.TestCase):
         self.assertEqual("My Column", self.mapper.retrieve("My Column").fetchone()[1])
 
     def test_retrieve(self):
-        self.assertEqual("FirstColumn", self.mapper.retrieve("FirstColumn").fetchone()[1])
+        self.assertEqual("FirstColumn", self.mapper.retrieve("FirstColumn").get_title())
 
     def test_update(self):
         self.mapper.update('FirstColumnModified', 2, self.idc)
-        self.assertEqual('FirstColumnModified', self.mapper.retrieve('FirstColumnModified').fetchone()[1])
+        self.assertEqual('FirstColumnModified', self.mapper.retrieve('FirstColumnModified').get_title())
 
     def tearDown(self):
         self.connection.execute('DELETE FROM column')
