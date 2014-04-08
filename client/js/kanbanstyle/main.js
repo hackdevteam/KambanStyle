@@ -29,7 +29,6 @@ function createTask(title, description, column_id) {
     })
 }
 
-
 createBoard("Board 1");
 setTimeout(function () {
         createColumn("Column 1", $(".board").attr("id"));
@@ -61,3 +60,16 @@ setTimeout(function () {
         }).get()[1]);
     }
     , 600);
+
+$(function(){
+    $(document).click(function(event){
+        if(event.target.id == 'CreateBoard'){
+             $('#templateCreateBoardForm').tmpl({id: "createBoardForm", name: "Create a new Board"}).appendTo("body");
+        }
+
+        if(event.target.id == 'CreateColumn'){
+            createColumn("Colum",1);
+        }
+
+    });
+});
