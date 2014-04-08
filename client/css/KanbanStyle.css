@@ -90,3 +90,11 @@ footer{
 	background-color: rgb(70,70,183);
 }
 
+#createBoardForm{
+    position: relative;
+    width: 50%;
+    margin-left:20%;
+    background: #84775D;
+    z-index: 1;
+}
+
