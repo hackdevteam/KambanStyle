@@ -3,16 +3,16 @@ import os
 import cherrypy
 from server.api.ColumnApiEndPoint import ColumnApiEndPoint
 from server.api.TaskApiEndPoint import TaskApiEndPoint
-
-from server.api.BoardApiEndPoint import BoardApiEndPoint
+from server.api.boardApiEndPoint import BoardApiEndPoint
 from server.kamban.Url import Url
 from server.persistence.PersistenceManager import PersistenceManager
 from server.persistence.filesystem.FilesystemPersistence import FilesystemPersistence
+from server.virtual_url.BoardURLDispatch import BoardURLDispatch
 
 API_BOARD = "/api/board"
 API_COLUMN = "/api/column"
 API_TASK = "/api/task"
-
+DEFAULT_URL = "/url"
 
 class Root():
     def __init__(self):
@@ -22,12 +22,16 @@ class Root():
         self.mount_end_point(BoardApiEndPoint(self.__persistence), API_BOARD)
         self.mount_end_point(ColumnApiEndPoint(self.__persistence), API_COLUMN)
         self.mount_end_point(TaskApiEndPoint(self.__persistence), API_TASK)
+        self.mount_dispatch(BoardURLDispatch(), DEFAULT_URL)
         self.start_server()
 
     def config_server_to_serve_static_content(self):
         self.__config = {'/': {'tools.staticdir.on': True,
                                'tools.staticdir.dir': os.path.abspath("../client/"),
                                'tools.staticdir.index': 'index.html'}}
+
+    def mount_dispatch(self, handler, handler_urls):
+        cherrypy.tree.mount(handler, handler_urls)
 
     def mount_end_point(self, end_point,end_point_uri):
         cherrypy.tree.mount(end_point,
