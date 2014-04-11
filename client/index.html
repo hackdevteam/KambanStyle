@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Puestos</title>
+    <title>Kanban Style</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
 
@@ -18,6 +18,8 @@
         <div class="board" id='${board_id}'>
             <div id='title'>
                 <h1>${title}</h1>
+                <button id = 'CreateBoard'>Create a New Board</button>
+                <button id = 'CreateColumn'>Create Column</button>
             </div>
             <div>
                 <div class="column-area"></div>
@@ -39,18 +41,13 @@
         </div>
     </script>
 
-    <script id='template' type='text/x-jquery-tmpl'>
-            <header>
-                ${title}
-            </header>
-            <article>
-                ${content}
-            </article>
-            <footer>
-                ${footer}
-            </footer>
-
-
+     <script id='templateCreateBoardForm' type='text/x-jquery-tmpl'>
+        <div id = ${id} class ="Task">
+            <h2>${name}</h2>
+            <p>Name</p>
+            <input type = "text" name = 'nameBoard' value = 'My Board'><br>
+            <input type = 'submit' name = 'accept' id = 'acceptCreateBoard' value = 'Create'>
+        </div>
     </script>
 
 </head>
