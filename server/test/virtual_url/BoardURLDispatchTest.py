@@ -25,6 +25,10 @@ class BoardURLDispatchTest(unittest.TestCase):
         response = requests.post('http://localhost:8080/url/pepeTest')
         self.assertEqual(200, response.status_code)
         self.assertEqual('99999', response.text)
-        
+
+    def test_fail_load_id(self):
+        response = requests.post('http://localhost:8080/url/pepe')
+        self.assertEqual(404, response.status_code)
+
 if __name__ == '__main__':
     unittest.main()
