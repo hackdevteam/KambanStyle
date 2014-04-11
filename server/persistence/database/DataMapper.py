@@ -1,20 +1,23 @@
-
 from sqlite3 import connect
 
-URL_DATABASE = "C:\\Users\Ramclen\Desktop\KanbanStyle.sqlite"
+URL_DATABASE = "C:\\Users\Josue\Desktop\KanbanStyle.sqlite"
+
 
 class DataMapper:
+    def __init__(self):
+        self.query = ""
 
-  def __init__(self):
-    self.query=""
+    def launch_query(self, *args):
+        connection = connect(URL_DATABASE)
+        result = connection.execute(self.query, *args)
+        connection.commit()
+        return result
 
-  def launch_query(self, *args):
-    connection = connect(URL_DATABASE)
-    return connection.execute(self.query, args)
+    def abstract_insert(self, *args):
+        self.launch_query(*args)
 
-  def abstract_insert(self, *args):
-    #TODO RAM memory access
-    self.launch_query(*args)
+    def abstract_retrieve(self, *args):
+        return self.launch_query(*args)
 
-  def abstract_retrive(self, *args):
-    return self.launch_query(*args)
+    def abstract_update(self, *args):
+        self.launch_query(*args)
