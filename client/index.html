@@ -15,16 +15,17 @@
     <script src="js/kanbanstyle/main.js"></script>
 
     <script id='templateBoard' type='text/x-jquery-tmpl'>
-        <div class="board" id='${board_id}'>
-            <div id='title'>
-                <h1>${title}</h1>
-                <button id = 'CreateBoard'>Create a New Board</button>
-                <button id = 'CreateColumn'>Create Column</button>
+        <section class="board-area">
+            <div class="board" id='${board_id}'>
+                <div id='title'>
+                    <h1>${title}</h1>
+                    <button id = 'CreateColumn'>Create Column</button>
+                </div>
+                <div>
+                    <div class="column-area"></div>
+                </div>
             </div>
-            <div>
-                <div class="column-area"></div>
-            </div>
-        </div>
+        </section>
     </script>
 
     <script id='templateColumn' type='text/x-jquery-tmpl'>
@@ -32,6 +33,7 @@
             <h1>${title}</h1>
             <div id="${column_id}-task-area" class="list-task"></div>
         </div>
+
     </script>
 
     <script id='templateTask' type='text/x-jquery-tmpl'>
@@ -39,19 +41,21 @@
             <h2>${title}</h2>
             <p>${description}</p>
         </div>
+
     </script>
 
-     <script id='templateCreateBoardForm' type='text/x-jquery-tmpl'>
-        <div id = ${id} class ="Task">
-            <h2>${name}</h2>
-            <p>Name</p>
-            <input type = "text" name = 'nameBoard' value = 'My Board'><br>
-            <input type = 'submit' name = 'accept' id = 'acceptCreateBoard' value = 'Create'>
+    <script id='templateCreateBoardForm' type='text/x-jquery-tmpl'>
+        <div id = ${id}>
+            <div id = 'titlePage'>KanBan Style</div>
+            <form id = 'formCreateBoard' action="javascript:createBoard()">
+                <input type = "text" name = 'nameBoard' value = 'My Board'>
+                <input type = 'submit' name = 'accept' id = 'acceptCreateBoard' value = 'Create'>
+            </form>
         </div>
+
     </script>
 
 </head>
 <body>
-<section class="board-area"></section>
 </body>
 </html>

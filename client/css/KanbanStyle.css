@@ -92,9 +92,17 @@ footer{
 
 #createBoardForm{
     position: relative;
-    width: 50%;
-    margin-left:20%;
+    margin-left:36%;
+    margin-top:15%;
     background: #84775D;
-    z-index: 1;
+}
+
+#titlePage{
+    font-size:50px;
+    margin-bottom:10%;
+}
+
+#formCreateBoard{
+    align:center;
 }
 
