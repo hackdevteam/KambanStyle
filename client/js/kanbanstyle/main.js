@@ -3,30 +3,30 @@ function PresentationManager(){
         $("#create-board-form-area").remove();
         boardArea.html(boardTemplate.tmpl(boardData));
         $("#" + boardData.board_id + " .board-title").dblclick(function(event){
-            $(event.currentTarget).hide();
-            $(event.currentTarget).after(editBoardTitleTemplate);
+            showEditTitle($(event.currentTarget), editBoardTitleTemplate);
         });
     };
 
     this.showColumn = function(columnData, columnArea){
         columnArea.append(columnTemplate.tmpl(columnData));
         $("#" + columnData.column_id + " .column-title").dblclick(function(event){
-            $(event.currentTarget).hide();
-            $(event.currentTarget).after(editColumnTitleTemplate);
+            showEditTitle($(event.currentTarget), editColumnTitleTemplate);
         });
     };
 
     this.showTask = function(taskData, taskArea){
         taskArea.append(taskTemplate.tmpl(taskData));
         $("#" + taskData.task_id + " .task-title").dblclick(function(event){
-            $(event.currentTarget).hide();
-            $(event.currentTarget).after(editTaskTitleTemplate);
+            showEditTitle($(event.currentTarget), editTaskTitleTemplate);
         });
         $("#" + taskData.task_id + " .task-description").dblclick(function(event){
-            $(event.currentTarget).hide();
-            var description = $(event.currentTarget).text();
-            $(event.currentTarget).after(editTaskDescriptionTemplate.tmpl({description: description}));
+            showEditTitle($(event.currentTarget), editTaskDescriptionTemplate.tmpl({description: $(event.currentTarget).text()}));
         });
+    };
+
+    function showEditTitle(targetElement, editTemplate){
+        targetElement.hide();
+        targetElement.after(editTemplate);
     }
 }
 
