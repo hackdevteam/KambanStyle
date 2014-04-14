@@ -23,45 +23,46 @@ function PresentationManager(){
             showEditTitle($(event.currentTarget), editTaskDescriptionTemplate.tmpl({description: $(event.currentTarget).text()}));
         });
     };
-
-    function showEditTitle(targetElement, editTemplate){
+    var showEditTitle = function(targetElement, editTemplate){
         targetElement.hide();
         targetElement.after(editTemplate);
     }
 }
 
-function Responses(){
-    this.presentationManager = new PresentationManager();
+function ResponsesManager(){
+    var presentationManager = new PresentationManager();
 
     this.boardCreationResponse = function(response){
-        this.presentationManager.showBoard(response, $(".board-area"));
+        presentationManager.showBoard(response, $(".board-area"));
     };
 
     this.columnCreationResponse = function(response){
-        this.presentationManager.showColumn(response, $(".column-area"));
+        presentationManager.showColumn(response, $(".column-area"));
     };
 
     this.taskCreationResponse = function(response){
-        $('#templateTask').tmpl(response).appendTo("#" + response.column_id + "-task-area");
+        presentationManager.showTask(response, $("#" + response.column_id + "-task-area"));
     };
 }
 
 function Connection(){
+    var responsesManager = new ResponsesManager();
+
     this.createBoard = function(title){
         $.post("api/board", {title: title}, function(response){
-            new Responses().boardCreationResponse(response);
+            responsesManager.boardCreationResponse(response);
         }, "json");
     };
 
     this.createColumn = function(title, board_id){
         $.post("api/column", {title: title, board_id: board_id}, function(response){
-            new Responses().columnCreationResponse(response);
+            new ResponsesManager().columnCreationResponse(response);
         }, "json");
     };
 
     this.createTask = function(title, description, column_id){
         $.post("api/task", {title: title, description: description, column_id: column_id}, function(response){
-            new Responses().taskCreationResponse(response);
+            new ResponsesManager().taskCreationResponse(response);
         }, "json")
     };
 }
@@ -80,9 +81,6 @@ function Context(){
     };
 }
 
-var connection = new Connection();
-var context = new Context();
-
 function createBoard(){
     var formObj = {};
     var inputs = $("#create-board-form").serializeArray();
@@ -91,3 +89,10 @@ function createBoard(){
     });
     connection.createBoard(formObj["board-name"]);
 }
+
+var connection;
+var context;
+$(document).ready(function(){
+    connection = new Connection();
+    context = new Context();
+});
