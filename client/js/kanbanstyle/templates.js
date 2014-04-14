@@ -2,7 +2,7 @@ var boardTemplate =$(
     "<div>" +
         "<div class='board' id='${board_id}'>" +
             "<h1 class='board-title'>${title}</h1>" +
-            "<button id='create-column-button'>Create Column</button>" +
+            "<button id='create-column-button'>+Column</button>" +
             "<div class='column-area'></div>" +
         "</div>" +
     "</div>");
@@ -23,7 +23,7 @@ var taskTemplate = $(
         "</div>" +
     "</div>");
 
-var editBoardTitleTemplate = $("<form id='edit-board-title' action='javascript:modifyBoardTitle()'><input type='text'></form>");
-var editColumnTitleTemplate = $("<form id='edit-column-title' action='javascript:modifyColumnTitle()'><input type='text'></form>");
-var editTaskTitleTemplate = $("<form id='edit-task-title' action='javascript:modifyTaskTitle()'><input type='text'></form>");
-var editTaskDescriptionTemplate = $("<div><form id='edit-task-description' action='javascript:modifyTaskDescription()'><textarea>${description}</textarea></form></div>");
+var editBoardTitleTemplate = $("<form id='edit-title' action='javascript:modifyBoardTitle()'><input type='text'></form>");
+var editColumnTitleTemplate = $("<form id='edit-title' action='javascript:modifyColumnTitle()'><input type='text'></form>");
+var editTaskTitleTemplate = $("<form id='edit-title' action='javascript:modifyTaskTitle()'><input type='text'></form>");
+var editTaskDescriptionTemplate = $("<div><form id='edit-description' action='javascript:modifyTaskDescription()'><textarea>${description}</textarea></form></div>");

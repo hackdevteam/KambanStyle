@@ -1,4 +1,6 @@
 function PresentationManager(){
+    var lastEditedElement = {};
+
     this.showBoard = function(boardData, boardArea){
         $("#create-board-form-area").remove();
         boardArea.html(boardTemplate.tmpl(boardData));
@@ -23,9 +25,21 @@ function PresentationManager(){
             showEditTitle($(event.currentTarget), editTaskDescriptionTemplate.tmpl({description: $(event.currentTarget).text()}));
         });
     };
-    var showEditTitle = function(targetElement, editTemplate){
+
+    function showEditTitle(targetElement, editTemplate){
         targetElement.hide();
         targetElement.after(editTemplate);
+        lastEditedElement = targetElement;
+        $(document).click(function(event){
+            cancelEditOperation(event);
+        });
+    }
+
+    function cancelEditOperation(event){
+        lastEditedElement.show();
+        $("#edit-title").remove();
+        $("#edit-description").remove();
+        $(document).off("click");
     }
 }
 
@@ -56,16 +70,17 @@ function Connection(){
 
     this.createColumn = function(title, board_id){
         $.post("api/column", {title: title, board_id: board_id}, function(response){
-            new ResponsesManager().columnCreationResponse(response);
+            responsesManager.columnCreationResponse(response);
         }, "json");
     };
 
     this.createTask = function(title, description, column_id){
         $.post("api/task", {title: title, description: description, column_id: column_id}, function(response){
-            new ResponsesManager().taskCreationResponse(response);
+            responsesManager.taskCreationResponse(response);
         }, "json")
     };
 }
+
 function Context(){
     this.boardId = [];
     this.boardTitle = [];
