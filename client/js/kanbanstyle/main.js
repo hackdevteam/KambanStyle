@@ -1,21 +1,39 @@
-$(document).ready(function(){
-    $('#templateCreateBoardForm').tmpl({name: "Create a new Board"}).appendTo("body");
-});
-
 function PresentationManager(){
-    this.createBoard = function(boardData, boardArea){
-        $("#createBoardForm").remove();
+    this.showBoard = function(boardData, boardArea){
+        $("#create-board-form-area").remove();
         boardArea.html(boardTemplate.tmpl(boardData));
+        $("#board-title").dblclick(function(event){
+            $("#"+event.currentTarget.id).hide();
+            $(".board-title-area").append(editBoardTitleTemplate);
+        });
     };
+
+    this.showColumn = function(columnData, columnArea){
+        columnArea.append(columnTemplate.tmpl(columnData));
+        $("#"+columnData.column_id+">h1").dblclick(function(event){
+            $(event.currentTarget).hide();
+            $(event.currentTarget).after(editColumnTitleTemplate);
+        });
+    };
+
+    this.showTask = function(taskData, taskArea){
+        taskArea.append(taskTemplate.tmpl(taskData));
+        $("#"+taskData.task_id+">h2").dblclick(function(event){
+            $(event.currentTarget).hide();
+            $(event.currentTarget).after(editTaskTitleTemplate);
+        });
+    }
 }
 
 function Responses(){
+    this.presentationManager = new PresentationManager();
+
     this.boardCreationResponse = function(response){
-        new PresentationManager().createBoard(response, $(".board-area"));
+        this.presentationManager.showBoard(response, $(".board-area"));
     };
 
     this.columnCreationResponse = function(response){
-        $('#templateColumn').tmpl(response).appendTo(".column-area");
+        this.presentationManager.showColumn(response, $(".column-area"));
     };
 
     this.taskCreationResponse = function(response){
@@ -62,9 +80,9 @@ var context = new Context();
 
 function createBoard(){
     var formObj = {};
-    var inputs = $("#formCreateBoard").serializeArray();
+    var inputs = $("#create-board-form").serializeArray();
     $.each(inputs, function(i, input){
         formObj[input.name] = input.value;
     });
-    connection.createBoard(formObj["nameBoard"]);
+    connection.createBoard(formObj["board-name"]);
 }
