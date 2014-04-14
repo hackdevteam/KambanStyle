@@ -12,26 +12,16 @@
     <script src="js/kanbanstyle/main.js"></script>
     <script src="js/kanbanstyle/templates.js"></script>
 
-    <script id='templateTask' type='text/x-jquery-tmpl'>
-        <div id = ${idt} class ="Task">
-            <h2>${title}</h2>
-            <p>${description}</p>
-        </div>
-    </script>
-
-    <script id='templateCreateBoardForm' type='text/x-jquery-tmpl'>
-        <div id="createBoardForm">
-            <div id = 'titlePage'>KanBan Style</div>
-            <form id = 'formCreateBoard' action="javascript:createBoard()">
-                <input type = "text" name = 'nameBoard' value = 'My Board'>
-                <input type = 'submit' name = 'accept' id = 'acceptCreateBoard' value = 'Create'>
-            </form>
-        </div>
-    </script>
-
 </head>
 <body>
 <section class="board-area">
 </section>
+<div id="create-board-form-area">
+    <div id='titlePage'>KanBan Style</div>
+    <form id='create-board-form' action="javascript:createBoard()">
+        <label><input type="text" name='board-name' value='My Board'></label>
+        <input type='submit' name='accept' value='Create'>
+    </form>
+</div>
 </body>
 </html>
