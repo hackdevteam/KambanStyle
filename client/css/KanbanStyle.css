@@ -56,14 +56,14 @@ footer {
     font-style: italic;
 }
 
-.list-task {
+.task-area {
     background-color: #F5F5F5;
 
     border-radius: 5px;
     box-shadow: 5px 5px 5px #3A2500;
 }
 
-.Task {
+.task {
     height: 15%;
     width: -moz-fit-content;
     border-radius: 5px;
@@ -72,23 +72,24 @@ footer {
     border: 2px inset;
 }
 
-.Task:hover {
+.task:hover {
 }
 
-.Task #red {
+.task #red {
     background-color: rgb(183, 70, 70);
 }
 
-.Task #green {
+.task #green {
     background-color: rgb(70, 183, 70);
 
 }
 
-.Task #blue {
+.task #blue {
     background-color: rgb(70, 70, 183);
 }
 
-#createBoardForm {
+#create-board-form-area {
+    align: center;
     position: relative;
     margin-left: 36%;
     margin-top: 15%;
@@ -100,7 +101,4 @@ footer {
     margin-bottom: 10%;
 }
 
-#formCreateBoard {
-    align: center;
-}
 
