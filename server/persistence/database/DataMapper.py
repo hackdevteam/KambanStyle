@@ -1,6 +1,6 @@
 from sqlite3 import connect
 
-URL_DATABASE = "C:\\Users\Josue\Desktop\KanbanStyle.sqlite"
+URL_DATABASE = "C:\\Users\Maca\Desktop\KanbanStyle.sqlite"
 
 
 class DataMapper:
