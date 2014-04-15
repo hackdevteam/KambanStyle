@@ -23,6 +23,16 @@ var taskTemplate = $(
         "</div>" +
     "</div>");
 
+var createBoardForm = $(
+    "<div id='create-board-form-area'>" +
+        "<div id='titlePage'>KanBan Style</div>" +
+            "<form id='create-board-form' action='javascript:actionsController.createBoard()'>" +
+                "<label><input type='text' name='board-name' value='My Board'></label>" +
+                "<input type='submit' name='accept' value='Create'>" +
+            "</form>"+
+        "</div>" +
+    "</div>");
+
 var editBoardTitleTemplate = $("<form id='edit-title' action='javascript:modifyBoardTitle()'><input type='text'></form>");
 var editColumnTitleTemplate = $("<form id='edit-title' action='javascript:modifyColumnTitle()'><input type='text'></form>");
 var editTaskTitleTemplate = $("<form id='edit-title' action='javascript:modifyTaskTitle()'><input type='text'></form>");
