@@ -10,8 +10,8 @@ class BoardURLDataMapper(DataMapper):
         DataMapper()
 
     def insert(self, url, id_board):
-        self.query = "INSERT INTO BoardURL (title, idb) VALUES(?,?)"
-        return self.abstract_insert(url, id_board)
+        self.query = "INSERT INTO BoardURL (url, idb) VALUES(?,?)"
+        return self.abstract_insert([url, id_board])
 
     def retrieve_idb(self, url):
         self.query = "SELECT idb FROM BoardURL WHERE url=?"
@@ -27,7 +27,12 @@ class BoardURLDataMapperTest(unittest.TestCase):
 
     def test_retrieve_idb(self):
         mapper = BoardURLDataMapper()
-        self.assertEqual("9", mapper.retrieve_idb("URLTest"))
+        self.assertEqual(9, mapper.retrieve_idb("URLTest"))
+
+    def test_insert_url(self):
+        mapper = BoardURLDataMapper()
+        mapper.insert("pepeTest2", "99")
+        self.assertEqual(99, mapper.retrieve_idb("pepeTest2"))
 
     def tearDown(self):
         self.connection.execute('DELETE FROM BoardURL')
