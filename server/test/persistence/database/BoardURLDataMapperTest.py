@@ -1,22 +1,10 @@
 import unittest
 from sqlite3 import connect
-from server.persistence.database.DataMapper import DataMapper
+
+from server.persistence.database.BoardURLDataMapper import BoardURLDataMapper
+
 
 URL_DATABASE = "C:\\Users\Maca\Desktop\KanbanStyle.sqlite"
-
-
-class BoardURLDataMapper(DataMapper):
-    def __init__(self):
-        DataMapper()
-
-    def insert(self, url, id_board):
-        self.query = "INSERT INTO BoardURL (url, idb) VALUES(?,?)"
-        return self.abstract_insert([url, id_board])
-
-    def retrieve_idb(self, url):
-        self.query = "SELECT idb FROM BoardURL WHERE url=?"
-        return self.abstract_retrieve([url, ]).fetchone()[0]
-
 
 class BoardURLDataMapperTest(unittest.TestCase):
     def setUp(self):
