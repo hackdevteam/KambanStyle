@@ -2,7 +2,10 @@ var boardTemplate =$(
     "<div>" +
         "<div class='board' id='${board_id}'>" +
             "<h1 class='board-title'>${title}</h1>" +
-            "<button id='create-column-button'>+Column</button>" +
+            "<form id='create-column-form' action='javascript:actionsController.createColumn()'>" +
+                "<button id='create-column-button' type='submit' name='create-column-button'>+Column</button>" +
+                "<input type='text' name='column-title' value='New Column'>" +
+            "</form>" +
             "<div class='column-area'></div>" +
         "</div>" +
     "</div>");
@@ -24,12 +27,14 @@ var taskTemplate = $(
     "</div>");
 
 var createBoardForm = $(
-    "<div id='create-board-form-area'>" +
-        "<div id='titlePage'>KanBan Style</div>" +
-            "<form id='create-board-form' action='javascript:actionsController.createBoard()'>" +
-                "<label><input type='text' name='board-name' value='My Board'></label>" +
-                "<input type='submit' name='accept' value='Create'>" +
-            "</form>"+
+    "<div>" +
+        "<div id='create-board-form-area'>" +
+            "<div id='titlePage'>KanBan Style</div>" +
+                "<form id='create-board-form' action='javascript:actionsController.createBoard()'>" +
+                    "<label><input type='text' name='board-name' value='${default_title}'></label>" +
+                    "<input type='submit' name='create-board-button'>" +
+                "</form>"+
+            "</div>" +
         "</div>" +
     "</div>");
 
