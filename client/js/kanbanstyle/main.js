@@ -1,64 +1,117 @@
-$(document).ready(function () {
-    $('#templateCreateBoardForm').tmpl({id: "createBoardForm", name: "Create a new Board"}).appendTo("body");
-});
+function PresentationManager(){
+    var lastEditedElement = {};
 
-function Responses() {
-    this.boardCreationResponse = function (response) {
-        $("body").html($('#templateBoard').tmpl(JSON.parse(response)));
+    this.showBoard = function(boardData, boardArea){
+        $("#create-board-form-area").remove();
+        boardArea.html(boardTemplate.tmpl(boardData));
+        $("#" + boardData.board_id + " .board-title").dblclick(function(event){
+            showEditTitle($(event.currentTarget), editBoardTitleTemplate);
+        });
     };
 
-    this.columnCreationResponse = function (response) {
-        $('#templateColumn').tmpl(JSON.parse(response)).appendTo(".column-area");
+    this.showColumn = function(columnData, columnArea){
+        columnArea.append(columnTemplate.tmpl(columnData));
+        $("#" + columnData.column_id + " .column-title").dblclick(function(event){
+            showEditTitle($(event.currentTarget), editColumnTitleTemplate);
+        });
     };
 
-    this.taskCreationResponse = function (response) {
-        var jsonResponse = JSON.parse(response);
-        $('#templateTask').tmpl(jsonResponse).appendTo("#" + jsonResponse.column_id + "-task-area");
+    this.showTask = function(taskData, taskArea){
+        taskArea.append(taskTemplate.tmpl(taskData));
+        $("#" + taskData.task_id + " .task-title").dblclick(function(event){
+            showEditTitle($(event.currentTarget), editTaskTitleTemplate);
+        });
+        $("#" + taskData.task_id + " .task-description").dblclick(function(event){
+            showEditTitle($(event.currentTarget), editTaskDescriptionTemplate.tmpl({description: $(event.currentTarget).text()}));
+        });
+    };
+
+    function showEditTitle(targetElement, editTemplate){
+        targetElement.hide();
+        targetElement.after(editTemplate);
+        lastEditedElement = targetElement;
+        $(document).click(function(event){
+            cancelEditOperation(event);
+        });
+    }
+
+    function cancelEditOperation(event){
+        lastEditedElement.show();
+        $("#edit-title").remove();
+        $("#edit-description").remove();
+        $(document).off("click");
+    }
+}
+
+function ResponsesManager(){
+    var presentationManager = new PresentationManager();
+
+    this.boardCreationResponse = function(response){
+        presentationManager.showBoard(response, $(".board-area"));
+        context.setBoardId(response.board_id);
+    };
+
+    this.columnCreationResponse = function(response){
+        presentationManager.showColumn(response, $(".column-area"));
+    };
+
+    this.taskCreationResponse = function(response){
+        presentationManager.showTask(response, $("#" + response.column_id + "-task-area"));
     };
 }
 
-function Connection() {
-    this.createBoard = function (title) {
-        $.post("api/board", {title: title}).done(function (response) {
-            new Responses().boardCreationResponse(response);
-        })
-    };
-
-    this.createColumn = function (title, board_id) {
-        $.post("api/column", {title: title, board_id: board_id}).done(function (response) {
-            new Responses().columnCreationResponse(response);
-        })
-    };
-
-    this.createTask = function (title, description, column_id) {
-        $.post("api/task", {title: title, description: description, column_id: column_id}).done(function (response) {
-            new Responses().taskCreationResponse(response);
-        })
+function Connection(){
+    this.post = function(url, data, responseCallback){
+        $.post(url, data, responseCallback, "json");
     };
 }
-function Context() {
-    this.boardId = [];
-    this.boardTitle = [];
-    this.columns = [];
-    this.getBoardId = function () {
+
+function ActionsController(connection, responsesManager){
+    const BOARD_URL = "api/board";
+    const COLUMN_URL = "/api/column";
+    const TASK_URL = "/api/task";
+    this.connection = connection;
+    this.responsesManager = responsesManager;
+
+    this.createBoard = function(){
+        var formObj = parseForm($("#create-board-form"));
+        this.connection.post(BOARD_URL, {title: formObj["board-name"]}, this.responsesManager.boardCreationResponse);
+    };
+
+    this.createColumn = function(){
+        var formObj = parseForm($("#create-column-form"));
+        this.connection.post(COLUMN_URL, {board_id: context.getBoardId(), title: formObj["column-title"]}, this.responsesManager.columnCreationResponse);
+    };
+
+    this.createTask = function(){
+        var taskId;
+        var description;
+        var columnId;
+        this.connection.post(TASK_URL, {task_id:taskId, description:description, column_id:columnId}, responsesManager.taskCreationResponse);
+    };
+
+    function parseForm(form){
+        var formObj = {};
+        $.each(form.serializeArray(), function(i, input){formObj[input.name] = input.value;});
+        return formObj;
+    }
+}
+
+var context = {
+    boardId: {},
+
+    getBoardId: function(){
         return this.boardId;
-    };
-    this.setBoardId = function (boardId) {
+    },
+
+    setBoardId: function(boardId){
         this.boardId = boardId;
-    };
-    this.getNumberOfColums = function () {
-        return this.columns.length
-    };
-}
+    }
+};
 
-var connection = new Connection();
-var context = new Context();
-
-function createBoard() {
-    var formObj = {};
-    var inputs = $("#formCreateBoard").serializeArray();
-    $.each(inputs, function (i, input) {
-        formObj[input.name] = input.value;
-    });
-    connection.createBoard(formObj["nameBoard"]);
-}
+const DEFAULT_BOARD_TITLE = "My Board";
+var actionsController;
+$(document).ready(function(){
+    actionsController = new ActionsController(new Connection(), new ResponsesManager());
+    $("body").append(createBoardForm.tmpl({default_title: DEFAULT_BOARD_TITLE}));
+});
