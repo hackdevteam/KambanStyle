@@ -2,10 +2,10 @@ describe("Double click allows to edit", function(){
     var TEST_BOARD_TITLE = "Test Board Title";
     var TEST_BOARD_ID = "testBoardId";
     var TEST_COLUMN_TITLE = "Column 1";
+    var TEST_COLUMN_ID = "c1";
     var TEST_TASK_TITLE = "Task 1";
     var TEST_TASK_ID = "t1";
     var TEST_TASK_DESCRIPTION = "This is just a short description of a task";
-    var TEST_COLUMN_ID = "c1";
     var presentationManager;
 
     beforeEach(function(){
