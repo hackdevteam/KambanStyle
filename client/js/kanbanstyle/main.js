@@ -87,26 +87,22 @@ function ActionsController(connection, responsesManager){
         var taskId;
         var description;
         var columnId;
-        this.connection.post(TASK_URL, {task_id:taskId, description:description, column_id:columnId}, responsesManager.taskCreationResponse);
+        this.connection.post(TASK_URL, {task_id: taskId, description: description, column_id: columnId}, responsesManager.taskCreationResponse);
     };
 
     function parseForm(form){
         var formObj = {};
-        $.each(form.serializeArray(), function(i, input){formObj[input.name] = input.value;});
+        $.each(form.serializeArray(), function(i, input){
+            formObj[input.name] = input.value;
+        });
         return formObj;
     }
 }
 
 var context = {
     boardId: {},
-
-    getBoardId: function(){
-        return this.boardId;
-    },
-
-    setBoardId: function(boardId){
-        this.boardId = boardId;
-    }
+    getBoardId: function(){return this.boardId;},
+    setBoardId: function(boardId){this.boardId = boardId;}
 };
 
 const DEFAULT_BOARD_TITLE = "My Board";

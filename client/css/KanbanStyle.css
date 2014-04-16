@@ -4,101 +4,94 @@
 */
 
 body {
-    background-color: #84775D;
-}
-
-header {
-    background-color: #FFFFE9;
-    border-radius: 20px;
-    box-shadow: 5px 5px 5px #3A2500;
+	background-color: #B9B9B9;
     text-align: center;
 }
 
-header h1 {
-    font-style: italic;
-    color: rgb(255, 255, 255);
-    text-shadow: black 0.1em 0.1em 0.2em;
+header{
+	background-color: #FFFFFF;
+	border-radius: 30px;
+	box-shadow: 5px 5px 5px #3A2500;
+	text-align: center;
 }
 
-article, footer, header {
-    background-color: #E3D77F;
-    box-shadow: 5px 5px 5px #3A2500;
+
+header h1{
+	font-style: italic;
+	color: rgb(255,255,255);
+	text-shadow: black 0.1em 0.1em 0.2em;
 }
 
-article {
+
+article, footer, header{
+	background-color: #E3D77F;
+	box-shadow: 5px 5px 5px #3A2500;
+}
+
+article{
+	border-radius: 5px;
+	width: 90%;
+	height: 80%;
+	position: relative;
+	left: 5%;
+}
+
+footer{
+	border-radius: 20px;
+	height: 5%;
+	text-align: center;	
+}
+
+.board{
     border-radius: 5px;
-    width: 90%;
-    height: 80%;
-    position: relative;
-    left: 5%;
+	width: 90%;
+	height: 80%;
+	position: relative;
+	left: 5%;
+    background-color: #F5F5F5;
 }
 
-article:hover, footer:hover, header:hover {
-    box-shadow: 10px 10px 10px #3A2500;
+#page-title h1{
+	text-align: center;
 }
 
-footer {
-    border-radius: 20px;
-    height: 5%;
-    text-align: center;
-}
-
-.column {
-
-    height: 100%;
-    width: -moz-fit-content;
-    border: 2px none;
+.column{
+	height:100%;
+	width: -moz-fit-content;
     margin: 1%;
     float: left;
+    border-radius: 10px;
+    border: 2px dashed white;
+    padding: 5px;
 }
 
-.column h2 {
-    font-style: italic;
+.column-area{
+	border-radius: 5px;
+	width: 90%;
+	height: 80%;
+	position: relative;
+	left: 5%;
 }
 
-.task-area {
-    background-color: #F5F5F5;
 
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px #3A2500;
+.column-title {
+	font-style: italic;
 }
 
-.task {
-    height: 15%;
-    width: -moz-fit-content;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px #3A2500;
-    margin: 3%;
-    border: 2px inset;
+.list-task{}
+
+.task{
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-right-radius: 10px;
+	width: -moz-fit-content;
+	height: 15%;
+	box-shadow: 5px 5px 5px #3A2500;
+    background-color: #F7FE2E;
+    padding: 3px;
+    margin-bottom: 5px;
 }
 
-.task:hover {
+.task:hover{
 }
-
-.task #red {
-    background-color: rgb(183, 70, 70);
-}
-
-.task #green {
-    background-color: rgb(70, 183, 70);
-
-}
-
-.task #blue {
-    background-color: rgb(70, 70, 183);
-}
-
-#create-board-form-area {
-    align: center;
-    position: relative;
-    margin-left: 36%;
-    margin-top: 15%;
-    background: #84775D;
-}
-
-#titlePage {
-    font-size: 50px;
-    margin-bottom: 10%;
-}
-
 
