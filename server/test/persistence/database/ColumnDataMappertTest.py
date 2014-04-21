@@ -15,15 +15,18 @@ class ColumnDataMapperTest(unittest.TestCase):
         self.connection.commit()
 
     def test_insert(self):
-        self.mapper.insert(Column("My Column", 2))
-        self.assertEqual("My Column", self.mapper.retrieve("My Column").fetchone()[1])
+        column_id = self.mapper.insert(Column("My Column", 2))
+        self.assertEqual("My Column", self.mapper.retrieve(column_id).get_title())
+
+    def test_insert_return_id(self):
+        self.assertIsNotNone(self.mapper.insert(Column("Other", 3)))
 
     def test_retrieve(self):
-        self.assertEqual("FirstColumn", self.mapper.retrieve("FirstColumn").get_title())
+        self.assertEqual("FirstColumn", self.mapper.retrieve(self.idc).get_title())
 
     def test_update(self):
         self.mapper.update('FirstColumnModified', 2, self.idc)
-        self.assertEqual('FirstColumnModified', self.mapper.retrieve('FirstColumnModified').get_title())
+        self.assertEqual('FirstColumnModified', self.mapper.retrieve(self.idc).get_title())
 
     def tearDown(self):
         self.connection.execute('DELETE FROM column')

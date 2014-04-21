@@ -14,7 +14,7 @@ class DataMapper:
         return result
 
     def abstract_insert(self, *args):
-        self.launch_query(*args)
+        return self.launch_query(*args).lastrowid
 
     def abstract_retrieve(self, *args):
         return self.launch_query(*args)
