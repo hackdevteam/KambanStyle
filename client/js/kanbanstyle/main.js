@@ -110,4 +110,7 @@ var actionsController;
 $(document).ready(function(){
     actionsController = new ActionsController(new Connection(), new ResponsesManager());
     $("body").append(createBoardForm.tmpl({default_title: DEFAULT_BOARD_TITLE}));
+
+    $("#nameBoard").focus();
+    $("#nameBoard").select();
 });

@@ -31,7 +31,7 @@ var createBoardForm = $(
         "<div id='create-board-form-area'>" +
             "<div id='page-title'><h1>KanBan Style</h1></div>" +
                 "<form id='create-board-form' action='javascript:actionsController.createBoard()'>" +
-                    "<label><input type='text' name='board-name' value='${default_title}'></label>" +
+                    "<label><input type='text' name='board-name' value='${default_title}' id = 'nameBoard'></label>" +
                     "<input type='submit' name='create-board-button'>" +
                 "</form>"+
             "</div>" +
