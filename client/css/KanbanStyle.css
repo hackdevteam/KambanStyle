@@ -55,6 +55,10 @@ footer{
 	text-align: center;
 }
 
+#create-column-form>input{
+    visibility: hidden;
+}
+
 .column{
 	height:100%;
 	width: -moz-fit-content;
