@@ -1,8 +1,7 @@
 function PresentationManager(){
     var self = this;
-    var lastEditedElement = {};
 
-    this.showBoard = function(boardData, boardArea){
+    this.addBoardToDOM = function(boardData, boardArea){
         $("#create-board-form-area").remove();
         boardArea.html(boardTemplate.tmpl(boardData));
         $("h1.board-title").dblclick(function(event){
@@ -10,14 +9,14 @@ function PresentationManager(){
         });
     };
 
-    this.showColumn = function(columnData, columnArea){
+    this.addColumnToDOM = function(columnData, columnArea){
         columnArea.append(columnTemplate.tmpl(columnData));
         $("#" + columnData.column_id + " .column-title").dblclick(function(event){
             self.showEditForm($(event.currentTarget), editColumnTitleTemplate.tmpl({text: $(event.currentTarget).text()}));
         });
     };
 
-    this.showTask = function(taskData, taskArea){
+    this.addTaskToDOM = function(taskData, taskArea){
         taskArea.append(taskTemplate.tmpl(taskData));
         $("#" + taskData.task_id + " .task-title").dblclick(function(event){
             self.showEditForm($(event.currentTarget), editTaskTitleTemplate.tmpl({text: $(event.currentTarget).text()}));
@@ -69,16 +68,16 @@ function ResponsesManager(){
     var presentationManager = new PresentationManager();
 
     this.boardCreationResponse = function(response){
-        presentationManager.showBoard(response, $(".board-area"));
+        presentationManager.addBoardToDOM(response, $(".board-area"));
         context.setBoardId(response.board_id);
     };
 
     this.columnCreationResponse = function(response){
-        presentationManager.showColumn(response, $(".column-area"));
+        presentationManager.addColumnToDOM(response, $(".column-area"));
     };
 
     this.taskCreationResponse = function(response){
-        presentationManager.showTask(response, $("#" + response.column_id + "-task-area"));
+        presentationManager.addTaskToDOM(response, $("#" + response.column_id + "-task-area"));
     };
 }
 

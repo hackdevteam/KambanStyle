@@ -101,9 +101,9 @@ describe("Double click on", function(){
         var boardData = {board_id: TEST_BOARD_ID, title: TEST_BOARD_TITLE};
         var columnData = {column_id: TEST_COLUMN_ID, title: TEST_COLUMN_TITLE};
         var taskData = {task_id: TEST_TASK_ID, title: TEST_TASK_TITLE, description: TEST_TASK_DESCRIPTION};
-        presentationManager.showBoard(boardData, $(".board-area"));
-        presentationManager.showColumn(columnData, $(".column-area"));
-        presentationManager.showTask(taskData, $("#" + TEST_COLUMN_ID + " .task-area"));
+        presentationManager.addBoardToDOM(boardData, $(".board-area"));
+        presentationManager.addColumnToDOM(columnData, $(".column-area"));
+        presentationManager.addTaskToDOM(taskData, $("#" + TEST_COLUMN_ID + " .task-area"));
     });
 
     afterEach(function(){

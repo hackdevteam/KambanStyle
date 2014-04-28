@@ -18,7 +18,7 @@ describe("Testing all the actions of the application", function(){
             const COLUMN_URL = "/api/column";
             const board_id = "testBoardID";
             context.setBoardId(board_id);
-            new PresentationManager().showBoard({title: "Test Board Title", board_id: board_id}, $(".board-area"));
+            new PresentationManager().addBoardToDOM({title: "Test Board Title", board_id: board_id}, $(".board-area"));
             var columnData = {board_id: board_id, title: "New Column"};
             spyOn(connection, "post");
             actionsController.createColumn();
@@ -40,7 +40,7 @@ describe("Testing all the actions of the application", function(){
     describe("modifyBoardTitle()", function(){
         it("should put the introduced title as board title", function(){
             var presentationManager = new PresentationManager();
-            presentationManager.showBoard({title:"Old Board Title", board_id:"1234"}, $(".board-area"));
+            presentationManager.addBoardToDOM({title:"Old Board Title", board_id:"1234"}, $(".board-area"));
             var newBoardTitle = "New Board Title";
             var $boardTitle = $(".board-title");
             presentationManager.showEditForm($boardTitle, editBoardTitleTemplate.tmpl({text:newBoardTitle}));

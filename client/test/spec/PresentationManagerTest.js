@@ -14,7 +14,7 @@ describe("Presentation Manager", function(){
         $(".html-reporter").before("<section class='board-area'></section>");
         presentationManager = new PresentationManager();
         var boardData = {board_id: TEST_BOARD_ID, title: TEST_BOARD_TITLE};
-        presentationManager.showBoard(boardData, $(".board-area"));
+        presentationManager.addBoardToDOM(boardData, $(".board-area"));
     });
 
     afterEach(function(){
