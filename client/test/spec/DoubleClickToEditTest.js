@@ -1,4 +1,4 @@
-describe("Double click allows to edit", function(){
+describe("Double click", function(){
     var TEST_BOARD_TITLE = "Test Board Title";
     var TEST_BOARD_ID = "testBoardId";
     var TEST_COLUMN_TITLE = "Column 1";
@@ -7,6 +7,9 @@ describe("Double click allows to edit", function(){
     var TEST_TASK_ID = "t1";
     var TEST_TASK_DESCRIPTION = "This is just a short description of a task";
     var presentationManager;
+    var pressKeyEvent = function(keyCode){
+        $.event.trigger({ type : 'keyup', which : keyCode });
+    };
 
     beforeEach(function(){
         $(".html-reporter").before("<section class='board-area'></section>");
@@ -23,27 +26,36 @@ describe("Double click allows to edit", function(){
         $(".board-area").remove();
     });
 
-    describe("double click on board title", function(){
-        it("should change the board title label for a text box", function(){
-            $(".board-title").dblclick();
-            expect(".board-title").toBeHidden();
-            expect("#edit-title").toBeVisible();
+    describe("on board title", function(){
+        it("should replace the board title label with a text box", function(){
+            var $boardTitle = $("h1.board-title");
+            $boardTitle.dblclick();
+            var $editTitle = $("#edit-title");
+            expect($boardTitle).toBeHidden();
+            expect($editTitle).toBeVisible();
+            expect($editTitle.find("input").val()).toBe($boardTitle.text());
         });
     });
 
     describe("double click on column title", function(){
-        it("should change the column title label for a text box", function(){
-            $("#" + TEST_COLUMN_ID + " .column-title").dblclick();
+        it("should replace the column title label with a text box", function(){
+            var $columnTitle = $("#" + TEST_COLUMN_ID + " .column-title");
+            $columnTitle.dblclick();
+            var $editTitle = $("#edit-title");
             expect("#" + TEST_COLUMN_ID + " .column-title").toBeHidden();
-            expect("#edit-title").toBeVisible();
+            expect($editTitle).toBeVisible();
+            expect($editTitle.find(">input").val()).toBe($columnTitle.text());
         });
     });
 
     describe("double click on task title", function(){
         it("should change the column title label for a text box", function(){
-            $("#" + TEST_TASK_ID + " .task-title").dblclick();
+            var $taskTitle = $("#" + TEST_TASK_ID + " .task-title");
+            $taskTitle.dblclick();
+            var $editTitle = $("#edit-title");
             expect("#" + TEST_TASK_ID + " .task-title").toBeHidden();
-            expect("#edit-title").toBeVisible();
+            expect($editTitle).toBeVisible();
+            expect($editTitle.find("input").val()).toBe($taskTitle.text());
         });
     });
 
@@ -58,12 +70,12 @@ describe("Double click allows to edit", function(){
         });
     });
 
-    describe("Making click in any place outside the input box", function(){
+    describe("pressing escape ", function(){
         describe("Editing the board title", function(){
             it("should cancels the operation", function(){
                 var $boardTitle = $(".board-title");
                 $boardTitle.dblclick();
-                $(".task-title").click();
+                pressKeyEvent(27);
                 expect($boardTitle).toBeVisible();
                 expect($("#edit-title")).not.toBeInDOM();
             });
@@ -72,7 +84,7 @@ describe("Double click allows to edit", function(){
             it("should cancels the operation", function(){
                 var $columnTitle = $("#" + TEST_COLUMN_ID + " .column-title");
                 $columnTitle.dblclick();
-                $(".task-description").click();
+                pressKeyEvent(27);
                 expect($columnTitle).toBeVisible();
                 expect($("#edit-title")).not.toBeInDOM();
             });
@@ -81,7 +93,7 @@ describe("Double click allows to edit", function(){
             it("should cancels the operation", function(){
                 var $taskTitle = $("#" + TEST_TASK_ID + " .task-title");
                 $taskTitle.dblclick();
-                $(".board-title").click();
+                pressKeyEvent(27);
                 expect("#" + TEST_TASK_ID + " .task-title").toBeVisible();
                 expect($("#edit-title")).not.toBeInDOM();
             });
@@ -91,7 +103,7 @@ describe("Double click allows to edit", function(){
             it("should cancels the operation", function(){
                 var $taskDescription = $("#" + TEST_TASK_ID + " .task-description");
                 $taskDescription.dblclick();
-                $(".board-title").click();
+                pressKeyEvent(27);
                 expect($taskDescription).toBeVisible();
                 expect($("#edit-description")).not.toBeInDOM();
             });

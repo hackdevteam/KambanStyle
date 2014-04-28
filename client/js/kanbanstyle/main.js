@@ -1,28 +1,29 @@
 function PresentationManager(){
+    const ESC_KEY_CODE = 27;
     var lastEditedElement = {};
 
     this.showBoard = function(boardData, boardArea){
         $("#create-board-form-area").remove();
         boardArea.html(boardTemplate.tmpl(boardData));
-        $("#" + boardData.board_id + " .board-title").dblclick(function(event){
-            showEditTitle($(event.currentTarget), editBoardTitleTemplate);
+        $("h1.board-title").dblclick(function(event){
+            showEditTitle($(event.currentTarget), editBoardTitleTemplate.tmpl({text:$(event.currentTarget).text()}));
         });
     };
 
     this.showColumn = function(columnData, columnArea){
         columnArea.append(columnTemplate.tmpl(columnData));
         $("#" + columnData.column_id + " .column-title").dblclick(function(event){
-            showEditTitle($(event.currentTarget), editColumnTitleTemplate);
+            showEditTitle($(event.currentTarget), editColumnTitleTemplate.tmpl({text:$(event.currentTarget).text()}));
         });
     };
 
     this.showTask = function(taskData, taskArea){
         taskArea.append(taskTemplate.tmpl(taskData));
         $("#" + taskData.task_id + " .task-title").dblclick(function(event){
-            showEditTitle($(event.currentTarget), editTaskTitleTemplate);
+            showEditTitle($(event.currentTarget), editTaskTitleTemplate.tmpl({text:$(event.currentTarget).text()}));
         });
         $("#" + taskData.task_id + " .task-description").dblclick(function(event){
-            showEditTitle($(event.currentTarget), editTaskDescriptionTemplate.tmpl({description: $(event.currentTarget).text()}));
+            showEditTitle($(event.currentTarget), editTaskDescriptionTemplate.tmpl({text: $(event.currentTarget).text()}));
         });
     };
 
@@ -30,16 +31,18 @@ function PresentationManager(){
         targetElement.hide();
         targetElement.after(editTemplate);
         lastEditedElement = targetElement;
-        $(document).click(function(event){
+        $(document).keyup(function(event){
             cancelEditOperation(event);
         });
     }
 
     function cancelEditOperation(event){
-        lastEditedElement.show();
-        $("#edit-title").remove();
-        $("#edit-description").remove();
-        $(document).off("click");
+        if(event.which == ESC_KEY_CODE){
+            lastEditedElement.show();
+            $("#edit-title").remove();
+            $("#edit-description").remove();
+            $(document).off("click");
+        }
     }
 }
 
