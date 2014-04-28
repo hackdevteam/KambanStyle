@@ -37,6 +37,20 @@ describe("Testing all the actions of the application", function(){
         });
     });
 
+    describe("modifyBoardTitle()", function(){
+        it("should put the introduced title as board title", function(){
+            var presentationManager = new PresentationManager();
+            presentationManager.showBoard({title:"Old Board Title", board_id:"1234"}, $(".board-area"));
+            var newBoardTitle = "New Board Title";
+            var $boardTitle = $(".board-title");
+            presentationManager.showEditForm($boardTitle, editBoardTitleTemplate.tmpl({text:newBoardTitle}));
+            var $editForm = $("#edit");
+            $editForm.submit();
+            expect($boardTitle.text()).toBe(newBoardTitle);
+            expect($editForm).not.toBeInDOM();
+        });
+    });
+
     var responsesManager;
     var connection;
     var actionsController;
@@ -51,6 +65,6 @@ describe("Testing all the actions of the application", function(){
 
     afterEach(function(){
         $("#create-board-form-area").remove();
-        $(".board-area").remove();
+        $($(".board-area")).remove();
     });
 });

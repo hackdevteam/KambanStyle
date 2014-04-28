@@ -1,49 +1,68 @@
 function PresentationManager(){
-    const ESC_KEY_CODE = 27;
+    var self = this;
     var lastEditedElement = {};
 
     this.showBoard = function(boardData, boardArea){
         $("#create-board-form-area").remove();
         boardArea.html(boardTemplate.tmpl(boardData));
         $("h1.board-title").dblclick(function(event){
-            showEditTitle($(event.currentTarget), editBoardTitleTemplate.tmpl({text:$(event.currentTarget).text()}));
+            self.showEditForm($(event.currentTarget), editBoardTitleTemplate.tmpl({text: $(event.currentTarget).text()}));
         });
     };
 
     this.showColumn = function(columnData, columnArea){
         columnArea.append(columnTemplate.tmpl(columnData));
         $("#" + columnData.column_id + " .column-title").dblclick(function(event){
-            showEditTitle($(event.currentTarget), editColumnTitleTemplate.tmpl({text:$(event.currentTarget).text()}));
+            self.showEditForm($(event.currentTarget), editColumnTitleTemplate.tmpl({text: $(event.currentTarget).text()}));
         });
     };
 
     this.showTask = function(taskData, taskArea){
         taskArea.append(taskTemplate.tmpl(taskData));
         $("#" + taskData.task_id + " .task-title").dblclick(function(event){
-            showEditTitle($(event.currentTarget), editTaskTitleTemplate.tmpl({text:$(event.currentTarget).text()}));
+            self.showEditForm($(event.currentTarget), editTaskTitleTemplate.tmpl({text: $(event.currentTarget).text()}));
         });
         $("#" + taskData.task_id + " .task-description").dblclick(function(event){
-            showEditTitle($(event.currentTarget), editTaskDescriptionTemplate.tmpl({text: $(event.currentTarget).text()}));
+            self.showEditForm($(event.currentTarget), editTaskDescriptionTemplate.tmpl({text: $(event.currentTarget).text()}));
         });
     };
 
-    function showEditTitle(targetElement, editTemplate){
+    this.modifyBoardTitle = function(value){
+        $(".board-title").text(value);
+    };
+
+    this.showEditForm = function(targetElement, editTemplate){
         targetElement.hide();
         targetElement.after(editTemplate);
         lastEditedElement = targetElement;
-        $(document).keyup(function(event){
-            cancelEditOperation(event);
+        $("#edit").keyup(function(event){
+            keyUpEventActions.executeActionOf(event);
         });
-    }
+    };
 
-    function cancelEditOperation(event){
-        if(event.which == ESC_KEY_CODE){
+    this.removeEditForm = function(){
+        $("#edit").remove();
+    };
+
+    this.makeVisible = function(element){
+        element.show();
+    };
+
+    var keyUpEventActions = {
+        executeActionOf: function(event){
+            this[event.which]();
+        },
+
+        13: function enter(){
+            $("#edit").submit();
+        },
+
+        27: function escape(){
             lastEditedElement.show();
-            $("#edit-title").remove();
-            $("#edit-description").remove();
+            $("#edit").remove();
             $(document).off("click");
         }
-    }
+    };
 }
 
 function ResponsesManager(){
@@ -75,6 +94,7 @@ function ActionsController(connection, responsesManager){
     const TASK_URL = "/api/task";
     this.connection = connection;
     this.responsesManager = responsesManager;
+    var presentationManager = new PresentationManager();
 
     this.createBoard = function(){
         var formObj = parseForm($("#create-board-form"));
@@ -91,6 +111,13 @@ function ActionsController(connection, responsesManager){
         var description;
         var columnId;
         this.connection.post(TASK_URL, {task_id: taskId, description: description, column_id: columnId}, responsesManager.taskCreationResponse);
+    };
+
+    this.modifyBoardTitle = function(){
+        presentationManager.makeVisible($(".board-title"));
+        presentationManager.modifyBoardTitle(parseForm($("#edit"))["board-title"])
+        presentationManager.removeEditForm();
+
     };
 
     function parseForm(form){
