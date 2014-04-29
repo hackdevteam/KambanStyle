@@ -18,7 +18,7 @@ describe("Testing all the actions of the application", function(){
             const COLUMN_URL = "/api/column";
             const board_id = "testBoardID";
             context.setBoardId(board_id);
-            new PresentationManager().addBoardToDOM({title: "Test Board Title", board_id: board_id}, $(".board-area"));
+            presentationManager.addBoardToDOM({title: "Test Board Title", board_id: board_id}, $(".board-area"));
             var columnData = {board_id: board_id, title: "New Column"};
             spyOn(connection, "post");
             actionsController.createColumn();
@@ -39,11 +39,9 @@ describe("Testing all the actions of the application", function(){
 
     describe("modifyBoardTitle()", function(){
         it("should put the introduced title as board title", function(){
-            var presentationManager = new PresentationManager();
-            presentationManager.addBoardToDOM({title:"Old Board Title", board_id:"1234"}, $(".board-area"));
             var newBoardTitle = "New Board Title";
             var $boardTitle = $(".board-title");
-            presentationManager.showEditForm($boardTitle, editBoardTitleTemplate.tmpl({text:newBoardTitle}));
+            presentationManager.showEditForm($boardTitle, editBoardTitleTemplate.tmpl({text: newBoardTitle}));
             var $editForm = $("#edit");
             $editForm.submit();
             expect($boardTitle.text()).toBe(newBoardTitle);
@@ -51,16 +49,26 @@ describe("Testing all the actions of the application", function(){
         });
     });
 
-    var responsesManager;
-    var connection;
-    var actionsController;
+    describe("modifyColumnTitle()", function(){
+        it("should put the introduced title as column title", function(){
+            var newColumnTitle = "New Column Title";
+            var $columnTitle = $("#" + COLUMN_ID + ">.column-title");
+            presentationManager.showEditForm($columnTitle, editColumnTitleTemplate.tmpl({text: newColumnTitle}));
+            var $editForm = $("#edit");
+            $editForm.submit();
+            expect($columnTitle.text()).toBe(newColumnTitle);
+            expect($editForm).not.toBeInDOM();
+        });
+    });
+
+    var COLUMN_TITLE = "Old Column";
+    var COLUMN_ID = "clm1234";
 
     beforeEach(function(){
-        connection = new Connection();
-        responsesManager = new ResponsesManager();
-        actionsController = new ActionsController(connection, responsesManager);
         $("body").append($("<section class='board-area'></section>"));
-        $(".html-reporter").before(createBoardForm.tmpl({default_title: DEFAULT_BOARD_TITLE}));
+        presentationManager.addBoardToDOM({title: "Old Board Title", board_id: "brd1234"}, $(".board-area"));
+        presentationManager.addColumnToDOM({title: COLUMN_TITLE, column_id: COLUMN_ID}, $(".column-area"));
+
     });
 
     afterEach(function(){

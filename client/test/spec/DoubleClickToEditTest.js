@@ -90,14 +90,12 @@ describe("Double click on", function(){
     var TEST_TASK_TITLE = "Task 1";
     var TEST_TASK_ID = "t1";
     var TEST_TASK_DESCRIPTION = "This is just a short description of a task";
-    var presentationManager;
     var pressKeyEvent = function(keyCode){
         $("#edit").trigger({ type: 'keyup', which: keyCode });
     };
 
     beforeEach(function(){
         $(".html-reporter").before("<section class='board-area'></section>");
-        presentationManager = new PresentationManager();
         var boardData = {board_id: TEST_BOARD_ID, title: TEST_BOARD_TITLE};
         var columnData = {column_id: TEST_COLUMN_ID, title: TEST_COLUMN_TITLE};
         var taskData = {task_id: TEST_TASK_ID, title: TEST_TASK_TITLE, description: TEST_TASK_DESCRIPTION};
