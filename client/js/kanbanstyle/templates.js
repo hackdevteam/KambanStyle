@@ -3,10 +3,11 @@ var boardTemplate =$(
         "<article class='board' id='${board_id}'>" +
             "<h1 class='board-title'>${title}</h1>" +
             "<form id='create-column-form' action='javascript:actionsController.createColumn()'>" +
-                "<button id='create-column-button' type='submit' name='create-column-button'>+Column</button>" +
                 "<input type='text' name='column-title' value='New Column'>" +
+                "<button class='myButton' id='create-column-button' type='submit' name='create-column-button'>+Column</button>" +
             "</form>" +
             "<div class='column-area'></div>" +
+            "<div id='trashIcon'> </div>" +
         "</article>" +
     "</div>");
 
@@ -32,7 +33,7 @@ var createBoardForm = $(
             "<div id='page-title'><h1>KanBan Style</h1></div>" +
                 "<form id='create-board-form' action='javascript:actionsController.createBoard()'>" +
                     "<label><input type='text' name='board-name' value='${default_title}'></label>" +
-                    "<input type='submit' name='create-board-button'>" +
+                    "<input class='myButton' type='submit' name='create-board-button'>" +
                 "</form>"+
             "</div>" +
         "</div>" +
