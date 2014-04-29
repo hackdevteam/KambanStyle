@@ -39,6 +39,6 @@ var createBoardForm = $(
     "</div>");
 
 var editBoardTitleTemplate = $("<div><form id='edit' action='javascript:actionsController.modifyBoardTitle()'><input type='text' name='board-title' value='${text}'></form></div>");
-var editColumnTitleTemplate = $("<div><form id='edit' action='javascript:actionsController.modifyColumnTitle()'><input type='text' name='column-title' value='${text}'></form></div>");
+var editColumnTitleTemplate = $("<div><form id='edit' action='javascript:actionsController.modifyColumnTitle()'><input type='text' name='column-title' value='${text}'><input class='hidden' type='text' name='columnId' value='${columnId}'></form></div>");
 var editTaskTitleTemplate = $("<div><form id='edit' action='javascript:actionsController.modifyTaskTitle()'><input type='text' value='${text}'></form></div>");
 var editTaskDescriptionTemplate = $("<div><form id='edit' action='javascript:actionsController.modifyTaskDescription()'><textarea>${text}</textarea></form></div>");

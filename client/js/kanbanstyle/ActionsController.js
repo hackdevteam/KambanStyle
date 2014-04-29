@@ -32,7 +32,8 @@ var actionsController = {
     modifyColumnTitle : function(){
         presentationManager.makeLastHiddenVisible();
         var $editForm = $("#edit");
-        presentationManager.modifyColumnTitle(this.parseForm($editForm)["column-title"]);
+        var parsedForm = this.parseForm($editForm);
+        presentationManager.modifyColumnTitle(parsedForm["columnId"], parsedForm["column-title"]);
         presentationManager.removeFromDOM($editForm)
     },
 

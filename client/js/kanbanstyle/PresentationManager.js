@@ -11,7 +11,7 @@ var presentationManager = {
     addColumnToDOM : function(columnData, columnArea){
         columnArea.append(columnTemplate.tmpl(columnData));
         $("#" + columnData.column_id + " .column-title").dblclick(function(event){
-            presentationManager.showEditForm($(event.currentTarget), editColumnTitleTemplate.tmpl({text: $(event.currentTarget).text()}));
+            presentationManager.showEditForm($(event.currentTarget), editColumnTitleTemplate.tmpl({text: $(event.currentTarget).text(), columnId:$(event.currentTarget).parent()[0].id}));
         });
     },
 

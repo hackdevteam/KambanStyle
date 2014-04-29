@@ -41,6 +41,10 @@ footer{
 	text-align: center;	
 }
 
+.hidden{
+    visibility: hidden;
+}
+
 #create-board-form-area{
     text-align: center;
 }

@@ -53,7 +53,7 @@ describe("Testing all the actions of the application", function(){
         it("should put the introduced title as column title", function(){
             var newColumnTitle = "New Column Title";
             var $columnTitle = $("#" + COLUMN_ID + ">.column-title");
-            presentationManager.showEditForm($columnTitle, editColumnTitleTemplate.tmpl({text: newColumnTitle}));
+            presentationManager.showEditForm($columnTitle, editColumnTitleTemplate.tmpl({text: newColumnTitle, columnId:COLUMN_ID}));
             var $editForm = $("#edit");
             $editForm.submit();
             expect($columnTitle.text()).toBe(newColumnTitle);
